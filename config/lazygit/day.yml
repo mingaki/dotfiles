@@ -1,0 +1,27 @@
+git:
+  paging:
+    colorArg: always
+    pager: diff-so-fancy
+gui:
+  showIcons: true
+  theme:
+    defaultFgColor:
+      # - default
+      - '#3d2b5a'
+  #   activeBorderColor:
+  #     - '#4d688e'
+  #     - bold
+  #   inactiveBorderColor:
+  #     - '#80a2ad'
+  #   selectedLineBgColor:
+  #     - '#ced4db'
+customCommands:
+  - key: "w"
+    prompts:
+      - type: "input"
+        title: "Commit"
+        initialValue: ""
+    command: git commit -m "{{index .PromptResponses 0}}" --no-verify
+    context: "global"
+    subprocess: true
+    description: "git commit ignoring pre-commit hook (custom)"

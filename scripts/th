@@ -1,0 +1,7 @@
+#!/bin/sh
+
+. $MY_BINS/utils/tmux_funcs.sh
+
+filepath=$(pwd)
+
+create_or_attach_to_session $filepath

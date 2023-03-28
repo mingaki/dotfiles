@@ -1,0 +1,8 @@
+#!/bin/sh
+
+. $MY_BINS/utils/tmux_funcs.sh
+
+z_result=$(zoxide query -l | fzf --reverse)
+
+create_or_attach_to_session $z_result
+

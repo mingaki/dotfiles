@@ -1,0 +1,90 @@
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# events for sketchybar
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_title_changed action="sketchybar --trigger title_change"
+
+# global settings
+yabai -m config mouse_follows_focus          off
+yabai -m config focus_follows_mouse          off
+yabai -m config window_origin_display        default
+yabai -m config window_placement             second_child
+yabai -m config window_topmost               off
+# yabai -m config window_shadow                on
+yabai -m config window_border                off
+yabai -m config window_border_hidpi          on
+yabai -m config window_border_blur           off
+yabai -m config window_border_radius         12
+
+# opacity
+yabai -m config window_opacity               on
+# yabai -m config window_opacity_duration      0.0
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.97
+
+yabai -m config window_border_width          3
+yabai -m config active_window_border_color   0xff775759
+yabai -m config normal_window_border_color   0xff555555
+yabai -m config insert_feedback_color        0xffd75f5f
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 off
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+# layout 
+yabai -m config external_bar                 all:27:0
+yabai -m config layout                       bsp
+yabai -m config top_padding                  8
+yabai -m config bottom_padding               8
+yabai -m config left_padding                 8
+yabai -m config right_padding                8
+yabai -m config window_gap                   8
+
+# apps to not manage (ignore)
+# system
+yabai -m rule --add app="Activity Monitor" manage=off sticky=on
+yabai -m rule --add app="App Store" manage=off sticky=on
+yabai -m rule --add app="Finder" manage=off sticky=on
+yabai -m rule --add app="Calendar" manage=off sticky=on
+yabai -m rule --add app="Mail" manage=off sticky=on
+yabai -m rule --add app="Music" manage=off sticky=on
+yabai -m rule --add app="Podcast" manage=off sticky=on
+yabai -m rule --add app="Dictionary" manage=off sticky=on
+yabai -m rule --add app="System Information" manage=off sticky=on
+
+# apps
+yabai -m rule --add app="Anki" manage=off
+yabai -m rule --add app="Archive Utility" manage=off
+yabai -m rule --add app="Docker Desktop" manage=off
+yabai -m rule --add app="IINA" manage=off
+yabai -m rule --add app="Logitech G HUB" manage=off
+yabai -m rule --add app="MarkText" manage=off
+yabai -m rule --add app="Pritunl" manage=off
+yabai -m rule --add app="Sourcetree" manage=off
+yabai -m rule --add app="Streaks" manage=off
+yabai -m rule --add app="zoom.us" manage=off
+# yabai -m rule --add app="Zotero" manage=off sticky=on
+yabai -m rule --add app="BaiduNetdisk" manage=off
+yabai -m rule --add app="calibre" manage=off
+yabai -m rule --add app="迅雷" manage=off
+yabai -m rule --add app="WeChat" title!="^WeChat.*" manage=off
+yabai -m rule --add app="Enfusion" title!="^Enfusion.*" manage=off
+
+# patterns
+yabai -m rule --add title="^Sign in – Google accounts" manage=off
+yabai -m rule --add title=".*Preferences$" manage=off
+yabai -m rule --add title="General" manage=off
+yabai -m rule --add title="^Tip of the Day$" manage=off # Jetbrains
+
+# YABAI_CERT=yabai-cert sh -c "$(curl -fsSL "https://git.io/update-yabai")" &

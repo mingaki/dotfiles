@@ -1,0 +1,6 @@
+**/kitty/themes/theme.conf
+**/lazygit/state.yml
+**/lazygit/config.yml
+**/nvim/plugin/
+**/karabiner/automatic_backups/
+packer_compiled.lua

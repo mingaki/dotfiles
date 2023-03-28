@@ -1,0 +1,49 @@
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+ITEM_DIR="$HOME/.config/sketchybar/items"
+ICON_FONT="SF Pro:Regular:14.0"
+LABEL_FONT="SF Pro:Semibold:14.0"
+
+# custom events
+sketchybar --add event window_focus  \
+           --add event title_change  \
+           --add event layout_change
+
+# bar
+sketchybar --bar     height=27                      \
+                     blur_radius=50                 \
+                     position=top                   \
+                     sticky=on                      \
+                     padding_left=0                 \
+                     padding_right=0                \
+                     color=0xcc3b4252               \
+                     y_offset=0                     \
+                     shadow=on                      \
+                                                    \
+           --default updates=when_shown             \
+                     drawing=on                     \
+                     y_offset=1                     \
+                     icon.font="$ICON_FONT"         \
+                     icon.color=0xffdddddd          \
+                     label.font="$LABEL_FONT"       \
+                     label.color=0xffdddddd         \
+                     label.padding_left=4           \
+                     label.padding_right=6          \
+                     icon.padding_left=6            \
+                     icon.padding_right=4           \
+                     background.padding_left=2      \
+                     background.padding_right=2     \
+                     background.corner_radius=7     \
+                     background.height=20           \
+
+. "$ITEM_DIR/day_night.sh"
+. "$ITEM_DIR/spaces.sh"
+. "$ITEM_DIR/front_app.sh"
+. "$ITEM_DIR/mail.sh"
+. "$ITEM_DIR/clock.sh"
+. "$ITEM_DIR/battery.sh"
+. "$ITEM_DIR/input.sh"
+. "$ITEM_DIR/apple_music.sh"
+
+sketchybar --update
+
+echo "sketchybar configuration loaded.."
