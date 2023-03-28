@@ -1,4 +1,5 @@
 M = {}
+M.mode_table = { day = "dayfox", night = "tokyonight-moon" }
 
 local filepath = "~/.config/state.yml"
 
@@ -15,9 +16,8 @@ end
 
 function M.set_mode(mode)
   M.mode = mode
-  local mode_table = { day = "dayfox", night = "nordfox" }
 
-  M.theme = mode_table[mode]
+  M.theme = M.mode_table[mode]
   if not M.theme then
     M.theme = "dayfox"
   end

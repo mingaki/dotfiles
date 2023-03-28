@@ -1,6 +1,6 @@
-local mode = require("config.utils").get_system_mode()
-local mode_table = { day = "dayfox", night = "nordfox" }
-local theme = mode_table[mode]
+local utils = require("config.utils")
+local mode = utils.get_system_mode()
+local theme = utils.mode_table[mode]
 
 return {
   {

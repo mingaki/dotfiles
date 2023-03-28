@@ -35,15 +35,13 @@ set_mode() {
 
 	if [[ $mode = "day" ]]; then
 		local kitty_theme="dayfox"
-		local lazygit_theme="day"
 	else
-		local kitty_theme="nordfox"
-		local lazygit_theme="night"
+		local kitty_theme="tokyonight_moon"
 	fi
 
 	set_sketchbar_theme $mode
-	set_kitty_theme $kitty_theme
-	set_lazygit_theme $lazygit_theme
+	local kitty_theme_path=$(set_kitty_theme $kitty_theme)
+	set_lazygit_theme $kitty_theme_path
 	set_system_dark_mode $mode
 
 }
@@ -71,15 +69,34 @@ set_sketchbar_theme() {
 
 set_kitty_theme() {
 	local theme=$1
+	local theme_path="$CONFIG_DIR/kitty/themes/$theme.conf"
 	rm "$CONFIG_DIR/kitty/themes/theme.conf"
-	ln -s "$CONFIG_DIR/kitty/themes/$theme.conf" "$CONFIG_DIR/kitty/themes/theme.conf"
+	ln -s $theme_path "$CONFIG_DIR/kitty/themes/theme.conf"
 	kitty @ --to "unix:/tmp/mykitty" set-colors --all --configured "$CONFIG_DIR/kitty/themes/theme.conf"
+
+	echo $theme_path
+}
+
+get_color_from_kitty_conf() {
+	local kitty_theme_file=$1
+	local color_field=$2
+	local color_hex=$(grep -i "^$color_field" $kitty_theme_file | awk '{print $2}')
+	echo $color_hex
 }
 
 set_lazygit_theme() {
-	local theme=$1
-	rm "$CONFIG_DIR/lazygit/config.yml"
-	ln -s "$CONFIG_DIR/lazygit/$theme.yml" "$CONFIG_DIR/lazygit/config.yml"
+	local kitty_theme_path=$1
+	local lazygit_config_path=$CONFIG_DIR/lazygit/config.yml
+
+	local inactive_border=$(get_color_from_kitty_conf $kitty_theme_path "inactive_border_color")
+	color="\"$inactive_border\"" yq -i '.gui.theme.inactiveBorderColor[0] |= env(color)' $lazygit_config_path
+
+	local selected_bg=$(get_color_from_kitty_conf $kitty_theme_path "selection_background")
+	color="\"$selected_bg\"" yq -i '.gui.theme.selectedLineBgColor[0] |= env(color)' $lazygit_config_path
+	color="\"$selected_bg\"" yq -i '.gui.theme.selectedRangeBgColor[0] |= env(color)' $lazygit_config_path
+
+	local fg=$(get_color_from_kitty_conf $kitty_theme_path "foreground")
+	color="\"$fg\"" yq -i '.gui.theme.defaultFgColor[0] |= env(color)' $lazygit_config_path
 }
 
 set_system_dark_mode() {

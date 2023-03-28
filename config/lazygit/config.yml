@@ -5,9 +5,16 @@ git:
 gui:
   showIcons: true
   theme:
-    lightTheme: false
+    defaultFgColor:
+      - "#c8d3f5"
+    inactiveBorderColor:
+      - "#2f334d"
+    selectedLineBgColor:
+      - "#3654a7"
+    selectedRangeBgColor:
+      - "#3654a7"
 customCommands:
-  - key: "w"
+  - key: "W"
     prompts:
       - type: "input"
         title: "Commit"
