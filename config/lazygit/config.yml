@@ -7,12 +7,11 @@ gui:
   theme:
     defaultFgColor:
       - "#c8d3f5"
+    activeBorderColor:
+      - "#82aaff"
+      - bold
     inactiveBorderColor:
       - "#2f334d"
-    selectedLineBgColor:
-      - "#3654a7"
-    selectedRangeBgColor:
-      - "#3654a7"
 customCommands:
   - key: "W"
     prompts:
@@ -23,3 +22,6 @@ customCommands:
     context: "global"
     subprocess: true
     description: "git commit ignoring pre-commit hook (custom)"
+os:
+  editCommand: 'open_in_neovim.sh'
+  editCommandTemplate: '{{editor}} {{filename}} {{line}}'
