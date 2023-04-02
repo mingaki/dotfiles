@@ -72,7 +72,7 @@ set_kitty_theme() {
 	local theme_path="$CONFIG_DIR/kitty/themes/$theme.conf"
 	rm "$CONFIG_DIR/kitty/themes/theme.conf"
 	ln -s $theme_path "$CONFIG_DIR/kitty/themes/theme.conf"
-	kitty @ --to "unix:/tmp/mykitty" set-colors --all --configured "$CONFIG_DIR/kitty/themes/theme.conf"
+	kitty @ --to "unix:/tmp/kitty" set-colors --all --configured "$CONFIG_DIR/kitty/themes/theme.conf"
 
 	echo $theme_path
 }
