@@ -44,4 +44,12 @@ return {
       { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
     },
   },
+  {
+    "windwp/nvim-spectre",
+    -- stylua: ignore
+    keys = {
+      { "<leader>sr", function() require("spectre").open_file_search({select_word=true}) end, desc = "Replace in current file (Spectre)" },
+      { "<leader>sR", function() require("spectre").open({select_word=true}) end, desc = "Replace in files (Spectre)" },
+    },
+  },
 }
