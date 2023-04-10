@@ -2,8 +2,11 @@ return {
   { "nvim-treesitter/playground", event = "VeryLazy" },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      playground = {
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "json", "json5", "jsonc" })
+      end
+      opts.playground = {
         enable = true,
         disable = {},
         updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
@@ -20,7 +23,7 @@ return {
           goto_node = "<cr>",
           show_help = "?",
         },
-      },
-    },
+      }
+    end,
   },
 }

@@ -26,7 +26,7 @@ yabai -m config window_border_blur           off
 yabai -m config window_border_radius         12
 
 # opacity
-yabai -m config window_opacity               on
+yabai -m config window_opacity               off
 # yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.97
@@ -62,6 +62,7 @@ yabai -m rule --add app="Music" manage=off sticky=on
 yabai -m rule --add app="Podcast" manage=off sticky=on
 yabai -m rule --add app="Dictionary" manage=off sticky=on
 yabai -m rule --add app="System Information" manage=off sticky=on
+yabai -m rule --add app="Spotify" manage=off sticky=on
 
 # apps
 yabai -m rule --add app="Anki" manage=off

@@ -6,12 +6,19 @@ gui:
   showIcons: true
   theme:
     defaultFgColor:
-      - "#c8d3f5"
+      - "#3d2b5a"
     activeBorderColor:
-      - "#82aaff"
+      - "#2848a9"
       - bold
     inactiveBorderColor:
-      - "#2f334d"
+      - "#aab0ad"
+    selectedLineBgColor:
+      - "#e7d2be"
+    selectedRangeBgColor:
+      - "#e7d2be"
+keybinding:
+  universal:
+    quit: '<c-g>'
 customCommands:
   - key: "W"
     prompts:
@@ -22,6 +29,9 @@ customCommands:
     context: "global"
     subprocess: true
     description: "git commit ignoring pre-commit hook (custom)"
+# os:
+#   editCommand: 'nvim --server $NVIM --remote'
+#   editCommandTemplate: "{{editor}} {{filename}}:{{line}}"
 os:
-  editCommand: 'open_in_neovim.sh'
+  editCommand: 'lazygit_edit_in_nvim.sh'
   editCommandTemplate: '{{editor}} {{filename}} {{line}}'

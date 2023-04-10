@@ -1,6 +1,5 @@
-local utils = require("config.utils")
-local mode = utils.get_system_mode()
-local theme = utils.mode_table[mode]
+local mode = Get_system_mode()
+local theme = Get_mode_theme(mode)
 
 return {
   {

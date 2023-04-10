@@ -4,7 +4,7 @@
 
 vim.api.nvim_create_autocmd({ "FocusGained", "VimEnter" }, {
   callback = function()
-    require("config.utils").sync_mode()
+    Sync_mode()
   end,
   nested = true, -- trigger highlight for other plugins
 })

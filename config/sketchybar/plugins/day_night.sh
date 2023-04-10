@@ -88,16 +88,16 @@ set_lazygit_theme() {
 	local kitty_theme_path=$1
 	local lazygit_config_path=$CONFIG_DIR/lazygit/config.yml
 
-	local inactive_border=$(get_color_from_kitty_conf $kitty_theme_path "active_border_color")
-	color="\"$inactive_border\"" yq -i '.gui.theme.activeBorderColor[0] |= env(color)' $lazygit_config_path
+	local active_border=$(get_color_from_kitty_conf $kitty_theme_path "active_border_color")
+	color="\"$active_border\"" yq -i '.gui.theme.activeBorderColor[0] |= env(color)' $lazygit_config_path
 	yq -i '.gui.theme.activeBorderColor[1] |= "bold"' $lazygit_config_path
 
 	local inactive_border=$(get_color_from_kitty_conf $kitty_theme_path "inactive_border_color")
 	color="\"$inactive_border\"" yq -i '.gui.theme.inactiveBorderColor[0] |= env(color)' $lazygit_config_path
 
-	# local selected_bg=$(get_color_from_kitty_conf $kitty_theme_path "color3")
-	# color="\"$selected_bg\"" yq -i '.gui.theme.selectedLineBgColor[0] |= env(color)' $lazygit_config_path
-	# color="\"$selected_bg\"" yq -i '.gui.theme.selectedRangeBgColor[0] |= env(color)' $lazygit_config_path
+	local selected_bg=$(get_color_from_kitty_conf $kitty_theme_path "selection_background")
+	color="\"$selected_bg\"" yq -i '.gui.theme.selectedLineBgColor[0] |= env(color)' $lazygit_config_path
+	color="\"$selected_bg\"" yq -i '.gui.theme.selectedRangeBgColor[0] |= env(color)' $lazygit_config_path
 
 	local fg=$(get_color_from_kitty_conf $kitty_theme_path "foreground")
 	color="\"$fg\"" yq -i '.gui.theme.defaultFgColor[0] |= env(color)' $lazygit_config_path

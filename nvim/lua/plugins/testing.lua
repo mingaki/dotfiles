@@ -23,18 +23,39 @@ return {
             vim.cmd("Trouble quickfix")
           end,
         },
+        summary = {
+          mappings = {
+            attach = "a",
+            clear_marked = "M",
+            clear_target = "T",
+            debug = "d",
+            debug_marked = "D",
+            expand = { "<CR>", "<2-LeftMouse>", "l" },
+            expand_all = "e",
+            jumpto = "i",
+            mark = "m",
+            next_failed = "J",
+            output = "o",
+            prev_failed = "K",
+            run = "r",
+            run_marked = "R",
+            short = "O",
+            stop = "u",
+            target = "t",
+          },
+        },
       })
 
       -- keymap
       local wk = require("which-key")
       wk.register({
         t = {
-          name = "+test", -- optional group name
+          name = "+Toggle", -- optional group name
           s = {
             function()
               require("neotest").summary.toggle()
             end,
-            "Toggle neotest summary",
+            "neotest summary",
           },
         },
       }, { prefix = "<leader>" })

@@ -9,6 +9,12 @@ fi
 file_to_edit="$1"
 line="${2:-1}"
 
+if [[ ! -z "$NVIM" ]]; then
+	# If not in a tmux session, open the file in a new Neovim instance
+	nvim --server $NVIM --remote-send "<C-g>:e +${line} ${file_to_edit}<CR>"
+	return
+fi
+
 if [ -z "$TMUX" ]; then
 	# If not in a tmux session, open the file in a new Neovim instance
 	nvim +$line -- "$file_to_edit"
@@ -28,7 +34,6 @@ else
 	tmux select-window -t $neovim_window_index
 
 	# Send the :edit command followed by the file name, line, and column and press Enter
-	tmux send-keys ":edit ${file_to_edit}" Enter
-	tmux send-keys ":${line}" Enter
+	tmux send-keys ":edit +${line} ${file_to_edit}" Enter
 
 fi

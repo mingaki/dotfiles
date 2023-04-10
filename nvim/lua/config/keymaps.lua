@@ -23,4 +23,7 @@ else
   map("n", "<S-q>", "<cmd>bd<CR>", { desc = "Delete Buffer" })
 end
 
-map("n", "<A-z>", "<cmd>lua os.execute('sleep 0.1'); require('config.utils').sync_mode()<CR>")
+map("n", "<A-z>", "<cmd>lua os.execute('sleep 0.1'); Sync_mode()<CR>")
+
+map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
