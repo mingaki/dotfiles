@@ -10,15 +10,15 @@ return {
         virtual_text = false,
       },
       servers = {
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = "off",
-              },
-            },
-          },
-        },
+        --   pyright = {
+        --     settings = {
+        --       python = {
+        --         analysis = {
+        --           typeCheckingMode = "off",
+        --         },
+        --       },
+        --     },
+        --   },
         jsonls = {
           -- lazy-load schemastore when needed
           on_new_config = function(new_config)
@@ -36,6 +36,10 @@ return {
         },
       },
     },
+    init = function()
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      keys[#keys + 1] = { "gl", vim.diagnostic.open_float, desc = "Diagnostic" }
+    end,
   },
   {
 
@@ -45,7 +49,6 @@ return {
       ensure_installed = {
         "stylua",
         "shfmt",
-        "flake8",
         "pyright",
         "black",
       },
@@ -64,7 +67,7 @@ return {
             nls.builtins.formatting.stylua,
             nls.builtins.formatting.shfmt,
             nls.builtins.formatting.black,
-            nls.builtins.diagnostics.flake8,
+            nls.builtins.diagnostics.ruff,
           },
         }
       end,

@@ -1,7 +1,6 @@
 return {
   {
     "nvim-neotest/neotest",
-    event = "VeryLazy",
     dependencies = {
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
@@ -45,20 +44,15 @@ return {
           },
         },
       })
-
-      -- keymap
-      local wk = require("which-key")
-      wk.register({
-        t = {
-          name = "+Toggle", -- optional group name
-          s = {
-            function()
-              require("neotest").summary.toggle()
-            end,
-            "neotest summary",
-          },
-        },
-      }, { prefix = "<leader>" })
     end,
+    keys = {
+      {
+        "<leader><C-t>",
+        function()
+          require("neotest").summary.toggle()
+        end,
+        desc = "neotest summary",
+      },
+    },
   },
 }

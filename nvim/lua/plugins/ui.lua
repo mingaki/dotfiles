@@ -33,4 +33,30 @@ return {
       },
     },
   },
+  {
+    "folke/noice.nvim",
+    opts = {
+      routes = {
+        { filter = { event = "msg_show", find = "; before #%d+" }, skip = true },
+        { filter = { event = "msg_show", find = "; after #%d+" }, skip = true },
+        { filter = { event = "msg_show", find = "Downloaded ipynb file" }, skip = true },
+        { filter = { event = "msg_show", find = "search hit" }, skip = true },
+        {
+          filter = {
+            event = "msg_show",
+            find = "%d+L, %d+B",
+          },
+          view = "mini",
+        },
+      },
+    },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      opts.options.component_separators = { left = "", right = "" }
+      opts.options.section_separators = { left = "", right = "" }
+      table.remove(opts.sections.lualine_c)
+    end,
+  },
 }

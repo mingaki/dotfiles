@@ -10,19 +10,11 @@ ZPLUGIN_DIR="$HOME/.zplugins"
         https://github.com/marlonrichert/zsh-snap.git $ZPLUGIN_DIR
 source $ZPLUGIN_DIR/zsh-snap/znap.zsh
 
-# zsh plugins
 znap source romkatv/powerlevel10k
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929ca6"
-znap source zsh-users/zsh-autosuggestions
-znap source zsh-users/zsh-completions
-znap source zsh-users/zsh-syntax-highlighting
 
 ZVM_INIT_MODE=sourcing
 znap source jeffreytse/zsh-vi-mode
 
-export NVM_LAZY_LOAD=true
-znap source lukechilds/zsh-nvm
 
 znap function _pyenv pyenv              'eval "$( pyenv init - --no-rehash )"'
 compctl -K    _pyenv pyenv
@@ -36,7 +28,6 @@ compdef       _pipenv pipenv
 # opts
 export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
-# export GIT_EDITOR="nvim -u ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init_clean.lua"
 
 export PIPENV_VENV_IN_PROJECT=1
 
@@ -81,6 +72,7 @@ alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%
 alias gdiff="git diff HEAD"
 alias gtiff="git difftool HEAD"
 alias lg="lazygit"
+alias ltg="leetgo"
 
 alias ta="tmux attach"
 alias tn="tmux new -s"
@@ -100,18 +92,13 @@ alias proxyoff='unset http_proxy;unset https_proxy'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/local/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/usr/local/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# zsh plugins
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929ca6"
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-completions
 
+export NVM_LAZY_LOAD=true
+znap source lukechilds/zsh-nvm
+
+# must be sourced at the end
+znap source zsh-users/zsh-syntax-highlighting

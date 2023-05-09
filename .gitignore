@@ -1,5 +1,7 @@
 config/kitty/themes/theme.conf
 config/lazygit/state.yml
+config/gh/hosts.yml
 **/nvim/plugin/
 **/karabiner/automatic_backups/
 packer_compiled.lua
+**/tmux/plugins

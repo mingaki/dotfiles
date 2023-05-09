@@ -1,7 +1,11 @@
+ROOT_DIR="$HOME/.config/sketchybar"
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 ITEM_DIR="$HOME/.config/sketchybar/items"
-ICON_FONT="SF Pro:Regular:14.0"
+ICON_FONT="SF Pro:Semibold:14.0"
 LABEL_FONT="SF Pro:Semibold:14.0"
+
+source "$ROOT_DIR/colors.sh" # Loads all defined colors
+source "$ROOT_DIR/icons.sh" # Loads all defined icons
 
 # custom events
 sketchybar --add event window_focus  \
@@ -34,6 +38,12 @@ sketchybar --bar     height=27                      \
                      background.padding_right=2     \
                      background.corner_radius=7     \
                      background.height=20           \
+                     popup.background.border_width=2 \
+                     popup.background.corner_radius=9\
+                     popup.background.border_color=$POPUP_BORDER_COLOR\
+                     popup.background.color=$POPUP_BACKGROUND_COLOR\
+                     popup.blur_radius=20\
+                     popup.background.shadow.drawing=on
 
 . "$ITEM_DIR/day_night.sh"
 . "$ITEM_DIR/spaces.sh"
@@ -42,7 +52,9 @@ sketchybar --bar     height=27                      \
 . "$ITEM_DIR/clock.sh"
 . "$ITEM_DIR/battery.sh"
 . "$ITEM_DIR/input.sh"
-. "$ITEM_DIR/apple_music.sh"
+. "$ITEM_DIR/flow.sh"
+# . "$ITEM_DIR/apple_music.sh"
+. "$ITEM_DIR/spotify.sh"
 
 sketchybar --update
 
