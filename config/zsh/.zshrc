@@ -80,7 +80,7 @@ alias n="n -A"
 alias v="nvim"
 alias nv="nvim"
 alias help="tldr"
-alias top="htop"
+alias top="btop"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 
 alias per="pipenv run"

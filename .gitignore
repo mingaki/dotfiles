@@ -7,3 +7,4 @@ config/gh/hosts.yml.work
 **/karabiner/automatic_backups/
 packer_compiled.lua
 **/tmux/plugins
+**/lazy-lock.json
