@@ -19,11 +19,18 @@ packages=(
 	bat
 	bitwarden-cli
 	btop
+	fd
 	fzf
 	geckodriver
+	gh
+	j178/tap/leetgo
 	jq
+	lazydocker
+	lazygit
 	neovim
+	nnn
 	nvm
+	php
 	pipenv
 	pyenv
 	pyenv-virtualenv
@@ -35,50 +42,35 @@ packages=(
 	tree
 	wget
 	yabai
-	lazydocker
-	lazygit
-	leetgo
-	nnn
+	yq
 	zoxide
 )
 brew install "${packages[@]}"
 $(brew --prefix)/opt/fzf/install
 
-lsp=(
-	bash-language-server
-	lua-language-server
-	pyright
-)
-brew install "${lsp[@]}"
-
-linters=(
-	flake8
-	ruff
-)
-brew install "${linters[@]}"
-
-formatters=(
-	black
-	stylua
-	shfmt
-)
-brew install "${formatters[@]}"
+[[ -f ~/.tmux/plugins/tpm ]] ||
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 apps=(
 	1password
+	1password/tap/1password-cli
 	alfred
-	bitwarden
+	anki
+	docker
+	doll
+	eudic
 	firefox
 	font-cascadia-code
 	font-fira-code
+	font-sf-pro
 	font-symbols-only-nerd-font
 	google-chrome
 	google-drive
 	hammerspoon
 	hiddenbar
 	itsycal
+	karabiner-elements
 	kitty
-	logitech-g-hub
 	monitorcontrol
 	mos
 	neovide
@@ -92,3 +84,7 @@ apps=(
 )
 
 brew install --cask "${apps[@]}"
+
+touch ~/.config/state.yml
+
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false

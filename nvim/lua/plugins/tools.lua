@@ -18,12 +18,9 @@ return {
     "stevearc/overseer.nvim",
     cmd = { "OverseerRun", "OverseerToggle" },
     keys = {
-      { "<leader>o", desc = "Run tasks (Overseer)+" },
-      { "<leader>ot", "<cmd>OverseerToggle<cr>", desc = "Overseer: toggle task list" },
-      { "<leader>or", "<cmd>OverseerRun<cr>", desc = "Overseer: run task" },
-    },
-    opts = {
-      strategy = "toggleterm",
+      { "<leader>r", desc = "Run tasks (Overseer)+" },
+      { "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Overseer: toggle task list" },
+      { "<leader>rr", "<cmd>OverseerRun<cr>", desc = "Overseer: run task" },
     },
     config = true,
   },

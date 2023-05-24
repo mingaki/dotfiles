@@ -5,3 +5,4 @@ vim.g.python3_host_prog = "/Users/claude/.pyenv/versions/py3nvim/bin/python"
 local opt = vim.opt
 
 opt.formatoptions = "jqlnt"
+opt.cursorline = false

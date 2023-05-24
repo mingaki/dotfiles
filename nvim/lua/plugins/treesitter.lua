@@ -1,5 +1,4 @@
 return {
-  -- { "nvim-treesitter/playground", event = "VeryLazy" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)

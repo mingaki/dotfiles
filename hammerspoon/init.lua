@@ -28,7 +28,7 @@ M.toggle = function()
 	else
 		print("kitty: launch")
 		os.execute(
-			"/Applications/kitty.app/Contents/MacOS/kitty -d ~ --title scratchpad -1 --instance-group scratchpad -o background_opacity=1 -o macos_hide_from_tasks=yes -o macos_quit_when_last_window_closed=no &"
+			"/Applications/kitty.app/Contents/MacOS/kitty -d ~ --title scratchpad -1 --instance-group scratchpad -o background_opacity=1 -o macos_hide_from_tasks=yes -o macos_quit_when_last_window_closed=yes &"
 		)
 	end
 end

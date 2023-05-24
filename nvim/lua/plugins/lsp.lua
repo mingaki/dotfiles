@@ -10,15 +10,6 @@ return {
         virtual_text = false,
       },
       servers = {
-        --   pyright = {
-        --     settings = {
-        --       python = {
-        --         analysis = {
-        --           typeCheckingMode = "off",
-        --         },
-        --       },
-        --     },
-        --   },
         jsonls = {
           -- lazy-load schemastore when needed
           on_new_config = function(new_config)
@@ -47,10 +38,17 @@ return {
     cmd = "Mason",
     opts = {
       ensure_installed = {
-        "stylua",
-        "shfmt",
-        "pyright",
+        -- python
+        "flake8",
+        "ruff",
         "black",
+        "pyright",
+        -- lua
+        "lua-language-server",
+        "stylua",
+        -- shell
+        "shellcheck",
+        "shfmt",
       },
     },
     {

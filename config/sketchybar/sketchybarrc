@@ -27,9 +27,9 @@ sketchybar --bar     height=27                      \
                      drawing=on                     \
                      y_offset=1                     \
                      icon.font="$ICON_FONT"         \
-                     icon.color=0xffdddddd          \
+                     icon.color=$ICON_COLOR         \
                      label.font="$LABEL_FONT"       \
-                     label.color=0xffdddddd         \
+                     label.color=$LABEL_COLOR       \
                      label.padding_left=4           \
                      label.padding_right=6          \
                      icon.padding_left=6            \
@@ -49,6 +49,8 @@ sketchybar --bar     height=27                      \
 . "$ITEM_DIR/spaces.sh"
 . "$ITEM_DIR/front_app.sh"
 . "$ITEM_DIR/mail.sh"
+. "$ITEM_DIR/wechat.sh"
+. "$ITEM_DIR/slack.sh"
 . "$ITEM_DIR/clock.sh"
 . "$ITEM_DIR/battery.sh"
 . "$ITEM_DIR/input.sh"

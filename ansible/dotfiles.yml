@@ -52,12 +52,6 @@
       loop_control:
         label: "{{ home_dir }}/{{item.path | basename}}"
 
-    - name: Link powerlevel10k
-      file:
-        src: "{{ dotfiles_dir }}/config/powerlevel10k/.p10k.zsh"
-        dest: "{{ home_dir }}/.p10k.zsh"
-        state: link
-
     - name: Link nvim
       file:
         src: "{{ dotfiles_dir }}/nvim"
@@ -76,3 +70,8 @@
         dest: "{{ home_dir }}/.hammerspoon"
         state: link
 
+    - name: Link gitignore_global
+      file:
+        src: "{{ dotfiles_dir }}/.gitignore_global"
+        dest: "{{ home_dir }}/.gitignore_global"
+        state: link

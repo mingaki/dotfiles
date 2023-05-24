@@ -34,9 +34,9 @@ set_mode() {
 	write_mode_to_state $mode
 
 	if [[ $mode = "day" ]]; then
-		local kitty_theme="dayfox"
+		local kitty_theme="seoulbones_light"
 	else
-		local kitty_theme="tokyonight_moon"
+		local kitty_theme="seoulbones_dark"
 	fi
 
 	set_sketchbar_theme $mode
@@ -51,12 +51,12 @@ set_sketchbar_theme() {
 	if [[ $mode = "day" ]]; then
 		local icon="􀆮"
 		local icon_color="0xffffc16b"
-		local bar_color="0xcc3b4252"
+		local bar_color="0x993b4252"
 		local label="day"
 	else
 		local icon="􀇁"
 		local icon_color="0xffc5e1eb"
-		local bar_color="0xcc000000"
+		local bar_color="0x99000000"
 		local label="night"
 	fi
 

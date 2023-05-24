@@ -7,7 +7,7 @@ fi
 ZPLUGIN_DIR="$HOME/.zplugins"
 [[ -f $ZPLUGIN_DIR/zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git $ZPLUGIN_DIR
+        https://github.com/marlonrichert/zsh-snap.git $ZPLUGIN_DIR/zsh-snap
 source $ZPLUGIN_DIR/zsh-snap/znap.zsh
 
 znap source romkatv/powerlevel10k
@@ -56,6 +56,22 @@ n () {
             . "$NNN_TMPFILE"
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
+}
+
+load_env() {
+  if [[ -z "$1" ]]; then
+    filepath="./.env"
+  else
+    filepath=$1
+  fi
+
+  # Show env vars
+  grep -v '^#' $filepath
+
+  # Export env vars
+  set -o allexport
+  source $filepath
+  set +o allexport
 }
 
 # aliases

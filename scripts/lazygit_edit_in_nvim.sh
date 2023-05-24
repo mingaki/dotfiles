@@ -11,7 +11,7 @@ line="${2:-1}"
 
 if [[ ! -z "$NVIM" ]]; then
 	# If in a Neovim terminal, open the file in the current nvim instance
-	nvim --server $NVIM --remote-send "q:e +${line} ${file_to_edit}<CR>"
+	nvim --server $NVIM --remote-send "<C-w>:e +${line} ${file_to_edit}<CR>"
 	exit 0
 fi
 
