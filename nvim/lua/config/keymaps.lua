@@ -27,3 +27,8 @@ map("n", "<A-z>", "<cmd>lua os.execute('sleep 0.1'); Sync_mode()<CR>")
 
 map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+if vim.g.vscode then
+  vim.keymap.set("n", "H", "<cmd>Tabprevious<CR>")
+  vim.keymap.set("n", "L", "<cmd>Tabnext<CR>")
+end
