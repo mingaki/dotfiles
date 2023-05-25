@@ -63,11 +63,7 @@ return {
         { filter = { event = "msg_show", find = "search hit" }, skip = true },
         {
           view = "split",
-          filter = { cmdline = true },
-        },
-        {
-          view = "split",
-          filter = { event = "msg_show", min_height = 20 },
+          filter = { event = "msg_show", min_height = 10 },
         },
       })
     end,

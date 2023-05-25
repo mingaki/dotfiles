@@ -39,3 +39,15 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "NeotestWinselect", { link = "NeoTreeDotfile" })
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "lazyvim_close_with_q",
+  pattern = {
+    "aerial",
+    "neotest-output-panel",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
