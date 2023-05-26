@@ -30,5 +30,5 @@ customCommands:
     subprocess: true
     description: "git commit ignoring pre-commit hook (custom)"
 os:
-  editCommand: 'lazygit_edit_in_nvim.sh'
+  editCommand: 'edit-nvim-lazygit.sh'
   editCommandTemplate: '{{editor}} {{filename}} {{line}}'
