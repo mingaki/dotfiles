@@ -19,6 +19,7 @@ packages=(
 	bat
 	bitwarden-cli
 	btop
+	diff-so-fancy
 	fd
 	fzf
 	geckodriver
