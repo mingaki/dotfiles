@@ -6,19 +6,19 @@ gui:
   showIcons: true
   theme:
     defaultFgColor:
-      - "#555555"
+      - "#DDDDDD"
     activeBorderColor:
       - ""
       - bold
     inactiveBorderColor:
       - ""
     selectedLineBgColor:
-      - "#CCCCCC"
+      - "#777777"
     selectedRangeBgColor:
-      - "#CCCCCC"
-keybinding:
-  universal:
-    quit: '<c-g>'
+      - "#777777"
+# keybinding:
+#   universal:
+#     quit: '<c-g>'
 customCommands:
   - key: "W"
     prompts:

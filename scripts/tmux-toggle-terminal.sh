@@ -1,18 +1,23 @@
 #!/bin/bash
+
 function toggle_terminal() {
 	# Check if we are inside a tmux session
-	if [ -z "$TMUX" ]; then
-		echo "Not in a tmux session."
-		exit 1
+	if [[ -z "$TMUX" ]]; then
+		exit 0
 	fi
+
 	pane_count=$(tmux list-panes -t "$(tmux display-message -p '#{session_name}:#{window_index}')" | wc -l)
-	current_pane=$(tmux display-message -p '#{pane_index}')
-	# Check the conditions and perform the desired actions
-	if [ "$pane_count" -eq 1 ]; then
+	pane_index=$(tmux display-message -p '#{pane_index}')
+	pane_cmd=$(tmux display-message -p '#{pane_current_command}')
+
+	#
+	if [[ "$pane_count" -eq 1 ]]; then
 		# Create a vertical split pane below
 		tmux split-window -v
 	else
-		if [ "$current_pane" -eq 1 ]; then
+		is_zoomed=$(tmux list-panes -F '#F' | grep -m 1 Z)
+		if [[ ! -z $is_zoomed ]]; then
+			tmux resize-pane -Z
 			tmux select-pane -t 2
 		else
 			tmux select-pane -t 1
