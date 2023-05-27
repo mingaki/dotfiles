@@ -1,0 +1,41 @@
+[user]
+name = Guan Ming
+email = gm932015@gmail.com
+
+[color]
+ui = true
+
+[core]
+	excludesfile = /Users/claude/.gitignore_global
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+	light = true
+  side-by-side = false
+  line-numbers = true
+  syntax-theme = base16
+  line-numbers-minus-style = green
+  line-numbers-plus-style  = red
+  line-numbers-zero-style  = brightwhite
+  minus-style = black red
+  plus-style  = black green
+
+[merge]
+  conflictstyle = diff3
+
+[diff]
+  colorMoved = default
+
+[credential]
+	helper = store
+[credential "https://github.com"]
+  helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+  helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+

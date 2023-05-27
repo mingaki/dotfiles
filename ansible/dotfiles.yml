@@ -19,8 +19,8 @@
         excludes:
           - '.DS_Store'
           - '.git'
-          - 'powerlevel10k'
           - 'zsh'
+          - '.gitconfig'
       register: dot_config
 
     - name: Link .config items
@@ -74,4 +74,10 @@
       file:
         src: "{{ dotfiles_dir }}/.gitignore_global"
         dest: "{{ home_dir }}/.gitignore_global"
+        state: link
+
+    - name: Link gitconfig
+      file:
+        src: "{{ dotfiles_dir }}/config/.gitconfig"
+        dest: "{{ home_dir }}/.gitconfig"
         state: link

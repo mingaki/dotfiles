@@ -24,6 +24,7 @@ else
 end
 
 map("n", "<A-z>", "<cmd>lua os.execute('sleep 0.1'); Sync_mode()<CR>")
+map("n", "<leader>gg", "<cmd>lua os.execute('$MY_BINS/tmux-toggle-lazygit.sh')<CR>", { desc = "Lazygit" })
 
 map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "[<tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })

@@ -1,24 +1,22 @@
 git:
   paging:
+    useConfig: false
     colorArg: always
-    pager: diff-so-fancy
+    pager: delta --paging=never
 gui:
   showIcons: true
   theme:
     defaultFgColor:
-      - "#DDDDDD"
+      - "#555555"
     activeBorderColor:
       - ""
       - bold
     inactiveBorderColor:
       - ""
     selectedLineBgColor:
-      - "#777777"
+      - "#CCCCCC"
     selectedRangeBgColor:
-      - "#777777"
-# keybinding:
-#   universal:
-#     quit: '<c-g>'
+      - "#CCCCCC"
 customCommands:
   - key: "W"
     prompts:

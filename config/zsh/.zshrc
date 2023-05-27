@@ -34,6 +34,7 @@ export PIPENV_VENV_IN_PROJECT=1
 zstyle ':completion:*' menu select
 
 eval "$(zoxide init zsh)"
+eval "$(github-copilot-cli alias -- "$0")"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(open {})+abort' --color=bg+:#4d688e,pointer:#b1d196"
@@ -87,8 +88,7 @@ alias gp="git pull"
 alias gP="git push"
 alias gst="git status"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gdiff="git diff HEAD"
-alias gtiff="git difftool HEAD"
+alias gdiff="git diff --name-only | fzf --preview 'git diff {} | delta'"
 alias lg="lazygit"
 alias ltg="leetgo"
 

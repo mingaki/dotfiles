@@ -40,6 +40,7 @@ set_mode() {
 	fi
 
 	set_sketchbar_theme $mode
+	set_delta_theme $mode
 	local kitty_theme_path=$(set_kitty_theme $kitty_theme)
 	set_lazygit_theme $kitty_theme_path
 	set_system_dark_mode $mode
@@ -75,6 +76,15 @@ set_kitty_theme() {
 	kitty @ --to "unix:/tmp/kitty" set-colors --all --configured "$CONFIG_DIR/kitty/themes/theme.conf"
 
 	echo $theme_path
+}
+
+set_delta_theme() {
+	local mode=$1
+	if [[ $mode = "day" ]]; then
+		git config --global delta.light true
+	else
+		git config --global delta.light false
+	fi
 }
 
 get_color_from_kitty_conf() {

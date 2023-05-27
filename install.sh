@@ -24,6 +24,7 @@ packages=(
 	fzf
 	geckodriver
 	gh
+	git-delta
 	j178/tap/leetgo
 	jq
 	lazydocker
