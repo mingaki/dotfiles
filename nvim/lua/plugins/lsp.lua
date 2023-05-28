@@ -55,19 +55,15 @@ return {
       "jose-elias-alvarez/null-ls.nvim",
       event = { "BufReadPre", "BufNewFile" },
       dependencies = { "mason.nvim" },
-      opts = function()
+      opts = function(_, opts)
         local nls = require("null-ls")
-        return {
-          root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-          sources = {
-            nls.builtins.formatting.fish_indent,
-            nls.builtins.diagnostics.fish,
-            nls.builtins.formatting.stylua,
-            nls.builtins.formatting.shfmt,
-            nls.builtins.formatting.black,
-            nls.builtins.diagnostics.ruff,
-          },
+        local sources = {
+          nls.builtins.formatting.black,
+          nls.builtins.diagnostics.ruff,
         }
+        for index, value in ipairs(sources) do
+          table.insert(opts.sources, value)
+        end
       end,
     },
   },
