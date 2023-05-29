@@ -5,4 +5,5 @@ return {
   { "folke/tokyonight.nvim", enabled = false },
   { "catppuccin/nvim", enabled = false },
   { "EdenEast/nightfox.nvim", enabled = false },
+  { "kiyoon/jupynium.nvim", enabled = false },
 }
