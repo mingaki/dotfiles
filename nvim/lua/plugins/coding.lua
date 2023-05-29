@@ -4,7 +4,14 @@ return {
     config = function()
       require("aerial").setup({
         on_attach = function(bufnr)
-          vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>fa", "<cmd>AerialToggle!<CR>", { desc = "Toggle Aerial" })
+          vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>cs", "<cmd>AerialToggle!<CR>", { desc = "Toggle Aerial" })
+          vim.api.nvim_buf_set_keymap(
+            bufnr,
+            "n",
+            "<leader>cS",
+            "<cmd>AerialNavToggle<CR>",
+            { desc = "Toggle Aerial Nav" }
+          )
           -- Jump forwards/backwards with '{' and '}'
           vim.api.nvim_buf_set_keymap(bufnr, "n", "{", "<cmd>AerialPrev<CR>", { desc = "Prev Item in Aerial" })
           vim.api.nvim_buf_set_keymap(bufnr, "n", "}", "<cmd>AerialNext<CR>", { desc = "Next Item in Aerial" })

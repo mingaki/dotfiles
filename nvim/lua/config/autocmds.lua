@@ -44,6 +44,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = "lazyvim_close_with_q",
   pattern = {
     "aerial",
+    "aerial-nav",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
