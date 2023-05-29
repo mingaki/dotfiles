@@ -71,8 +71,10 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function(_, opts)
+      -- separators
       opts.options.component_separators = { left = "", right = "" }
       opts.options.section_separators = { left = "", right = "" }
+      -- libmodal
       opts.sections.lualine_a = {
         function()
           local mode_name
