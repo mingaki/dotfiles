@@ -97,4 +97,11 @@ return {
       require("lualine").setup(opts)
     end,
   },
+  {
+    "echasnovski/mini.indentscope",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      draw = { delay = 0, animation = require("mini.indentscope").gen_animation.none() },
+    },
+  },
 }
