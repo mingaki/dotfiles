@@ -12,11 +12,35 @@ end
 return {
   {
     "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
     opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
+      panel = {
+        enabled = true,
+        auto_refresh = false,
+        keymap = {
+          jump_prev = "<M-[>",
+          jump_next = "<M-]>",
+          accept = "<CR>",
+          refresh = "gr",
+          open = "<M-CR>",
+        },
+        layout = {
+          position = "right", -- | top | left | right
+          ratio = 0.4,
+        },
+      },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        debounce = 75,
+        keymap = {
+          accept = false,
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+      },
       filetypes = {
         yaml = false,
         markdown = false,
@@ -33,6 +57,47 @@ return {
           else
             return true
           end
+        end,
+      },
+    },
+    config = function(_, opts)
+      require("copilot").setup(opts)
+      vim.keymap.set("i", "<Tab>", function()
+        if require("copilot.suggestion").is_visible() then
+          require("copilot.suggestion").accept()
+        else
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+        end
+      end, { desc = "Super Tab" })
+    end,
+    dependencies = {
+      {
+        "nvim-lualine/lualine.nvim",
+        optional = true,
+        event = "VeryLazy",
+        opts = function(_, opts)
+          local Util = require("lazyvim.util")
+          local colors = {
+            [""] = Util.fg("Special"),
+            ["Normal"] = Util.fg("Special"),
+            ["Warning"] = Util.fg("DiagnosticError"),
+            ["InProgress"] = Util.fg("DiagnosticWarn"),
+          }
+          table.insert(opts.sections.lualine_x, 2, {
+            function()
+              local icon = require("lazyvim.config").icons.kinds.Copilot
+              local status = require("copilot.api").status.data
+              return icon .. (status.message or "")
+            end,
+            cond = function()
+              local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
+              return ok and #clients > 0
+            end,
+            color = function()
+              local status = require("copilot.api").status.data
+              return colors[status.status] or colors[""]
+            end,
+          })
         end,
       },
     },
