@@ -41,7 +41,7 @@ alt - t : yabai -m window --toggle float;    \
           sketchybar --trigger layout_change
 
 # toggle window split type
-alt - s : yabai -m window --toggle split
+alt - w : yabai -m window --toggle split
 alt - e : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end');\
           sketchybar --trigger layout_change
 
@@ -75,8 +75,12 @@ shift + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9
 alt - n : yabai -m space --focus next
 alt - p : yabai -m space --focus prev
 alt - o : yabai -m space --focus recent
-# data science
-alt - d : yabai -m space --focus "$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == true))[0].index')"
+#
+# fullscreen app
+# alt - x : yabai -m space --focus "$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == true))[0].index')"
+alt - a : yabai -m space --focus "$(yabai -m query --windows --display 1 | jq 'map(select(.app == "kitty" and ."is-native-fullscreen" == true))[0].space')"
+alt - s : yabai -m space --focus "$(yabai -m query --windows --display 1 | jq 'map(select(.app == "Firefox" and ."is-native-fullscreen" == true))[0].space')"
+alt - d : yabai -m space --focus "$(yabai -m query --windows --display 1 | jq 'map(select(.app == "Code" and ."is-native-fullscreen" == true))[0].space')"
 
 # create new space and focus
 shift + alt - n : yabai -m space --create && \
