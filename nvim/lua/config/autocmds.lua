@@ -2,7 +2,7 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
-vim.api.nvim_create_autocmd({ "FocusGained", "VimEnter" }, {
+vim.api.nvim_create_autocmd({ "FocusGained" }, {
   callback = function()
     Sync_mode()
   end,
@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "VimEnter" }, {
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "seoulbones",
+  pattern = { "seoulbones", "zenbones" },
   callback = function()
     if vim.o.background == "light" then
       vim.api.nvim_set_hl(0, "NeoTreeGitConflict", { bold = true, italic = true, fg = "#be6a84" })

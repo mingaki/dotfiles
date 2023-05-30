@@ -13,7 +13,7 @@ function Get_system_mode()
 end
 
 function Get_mode_theme(mode)
-  local mode_themes = { day = "seoulbones", night = "seoulbones" }
+  local mode_themes = { day = "zenbones", night = "seoulbones" }
   local theme = mode_themes[mode]
   if not theme then
     theme = "dayfox"
@@ -54,6 +54,14 @@ function Sync_mode()
 end
 
 return {
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = function()
+        Sync_mode()
+      end,
+    },
+  },
   {
     "EdenEast/nightfox.nvim",
     lazy = true,

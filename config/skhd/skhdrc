@@ -33,7 +33,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen;\
 alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
 
 # toggle day / night
-alt - z -> : sketchybar --trigger toggle_daynight
+f8 -> : sketchybar --trigger toggle_daynight
 
 # float / unfloat window and center on screen
 alt - t : yabai -m window --toggle float;    \

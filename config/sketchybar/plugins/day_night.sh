@@ -34,7 +34,7 @@ set_mode() {
 	write_mode_to_state $mode
 
 	if [[ $mode = "day" ]]; then
-		local kitty_theme="seoulbones_light"
+		local kitty_theme="zenbones_light"
 	else
 		local kitty_theme="seoulbones_dark"
 	fi
@@ -74,6 +74,7 @@ set_kitty_theme() {
 	rm "$CONFIG_DIR/kitty/themes/theme.conf"
 	ln -s $theme_path "$CONFIG_DIR/kitty/themes/theme.conf"
 	kitty @ --to "unix:/tmp/kitty" set-colors --all --configured "$CONFIG_DIR/kitty/themes/theme.conf"
+	kitty @ --to "unix:/tmp/kitty_scratch" set-colors --all --configured "$CONFIG_DIR/kitty/themes/theme.conf"
 
 	echo $theme_path
 }

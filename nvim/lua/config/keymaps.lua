@@ -23,7 +23,7 @@ else
   map("n", "<S-q>", "<cmd>bd<CR>", { desc = "Delete Buffer" })
 end
 
-map("n", "<A-z>", "<cmd>lua os.execute('sleep 0.1'); Sync_mode()<CR>")
+map("n", "<F8>", "<cmd>lua os.execute('sleep 0.1'); Sync_mode()<CR>")
 map("n", "<leader>gg", "<cmd>lua os.execute('$MY_BINS/tmux-toggle-lazygit.sh')<CR>", { desc = "Lazygit" })
 
 map("n", "]<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
