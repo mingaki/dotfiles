@@ -32,9 +32,7 @@ end
 function Set_mode(mode)
   local theme = Get_mode_theme(mode)
   local current_theme = vim.g.colors_name
-  if current_theme ~= theme then
-    vim.cmd("colorscheme " .. theme)
-  end
+  vim.cmd("colorscheme " .. theme)
   Set_background(mode)
   Daynight_mode = mode
 end
