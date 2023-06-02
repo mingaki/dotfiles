@@ -79,6 +79,12 @@ return {
               require("telescope.actions").select_default(prompt_bufnr)
               require("telescope.builtin").resume()
             end,
+            ["<c-x>"] = function(prompt_bufnr)
+              local actions = require("telescope.actions")
+              actions.delete_buffer(prompt_bufnr)
+              actions.move_to_top(prompt_bufnr)
+            end,
+            ["<c-s>"] = require("telescope.actions").select_horizontal,
           },
         },
       },
