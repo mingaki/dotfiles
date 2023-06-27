@@ -2,6 +2,12 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
+      renderers = {
+        message = {
+          { "indent", with_markers = true },
+          { "name", highlight = "NeoTreeMessage" },
+        },
+      },
       default_component_configs = {
         icon = {
           folder_empty = "󰜌",

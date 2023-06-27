@@ -5,15 +5,18 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
-file_to_edit="$1"
+solution="$1"
+question="$2"
+
+open "$question"
 
 if [[ ! -z "$NVIM" ]]; then
-	nvim --server $NVIM --remote-send "<C-\\>:e ${file_to_edit}<CR>"
+	nvim --server $NVIM --remote-send "<C-\\>:e ${solution}<CR>"
 	exit 0
 fi
 
 if [ -z "$TMUX" ]; then
-	nvim "$file_to_edit"
+	nvim "$solution"
 	exit 0
 fi
 
@@ -23,9 +26,9 @@ nvim_pane_id=$(get_pane_id_by_command nvim)
 nvim_window_id=$(get_window_id_by_command nvim)
 
 if [ -z "$nvim_pane_id" ]; then
-	tmux new-window -n "neovim" "nvim ${file_to_edit}"
+	tmux new-window -n "neovim" "nvim ${solution}"
 else
 	tmux select-window -t $nvim_window_id
 	tmux select-pane -t $nvim_pane_id
-	tmux send-keys ":edit ${file_to_edit}" Enter
+	tmux send-keys ":edit ${solution}" Enter
 fi

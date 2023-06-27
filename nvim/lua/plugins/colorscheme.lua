@@ -1,4 +1,4 @@
-Daynight_mode = "day"
+Daynight_mode = ""
 local filepath = "~/.config/state.yml"
 
 function Get_system_mode()
@@ -31,7 +31,6 @@ end
 
 function Set_mode(mode)
   local theme = Get_mode_theme(mode)
-  local current_theme = vim.g.colors_name
   vim.cmd("colorscheme " .. theme)
   Set_background(mode)
   Daynight_mode = mode
@@ -48,6 +47,9 @@ end
 
 function Sync_mode()
   local sys_mode = Get_system_mode()
+  if sys_mode == Daynight_mode then
+    return
+  end
   Set_mode(sys_mode)
 end
 
@@ -99,6 +101,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    enabled = false,
     opts = {
       flavour = "frappe",
       background = { -- :h background

@@ -9,12 +9,6 @@ return {
     } },
   },
   {
-    "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
-    config = true,
-    keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" } },
-  },
-  {
     "stevearc/overseer.nvim",
     cmd = { "OverseerRun", "OverseerToggle" },
     keys = {

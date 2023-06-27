@@ -78,7 +78,7 @@ alt - o : yabai -m space --focus recent
 #
 # fullscreen app
 # alt - x : yabai -m space --focus "$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == true))[0].index')"
-alt - a : yabai -m space --focus "$(yabai -m query --windows --display 1 | jq 'map(select(.app == "kitty" and ."is-native-fullscreen" == true))[0].space')"
+alt - a : yabai -m window --focus "$(yabai -m query --windows --display 1 | jq 'map(select(.app == "kitty" and ."title" != "scratchpad"))[0].id')"
 alt - s : yabai -m space --focus "$(yabai -m query --windows --display 1 | jq 'map(select((.app == "Firefox" or .app == "Safari" or .app == "Google Chrome") and ."is-native-fullscreen" == true))[0].space')"
 alt - d : yabai -m space --focus "$(yabai -m query --windows --display 1 | jq 'map(select(.app == "Code" and ."is-native-fullscreen" == true))[0].space')"
 

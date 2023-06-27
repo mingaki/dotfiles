@@ -7,8 +7,6 @@ function toggle_terminal() {
 	fi
 
 	pane_count=$(tmux list-panes -t "$(tmux display-message -p '#{session_name}:#{window_index}')" | wc -l)
-	pane_index=$(tmux display-message -p '#{pane_index}')
-	pane_cmd=$(tmux display-message -p '#{pane_current_command}')
 
 	#
 	if [[ "$pane_count" -eq 1 ]]; then

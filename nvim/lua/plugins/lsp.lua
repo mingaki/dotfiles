@@ -1,31 +1,10 @@
 return {
   {
-    "b0o/SchemaStore.nvim",
-    version = false, -- last release is way too old
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
-      diagnostics = {
-        virtual_text = false,
-      },
-      servers = {
-        jsonls = {
-          -- lazy-load schemastore when needed
-          on_new_config = function(new_config)
-            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-          end,
-          settings = {
-            json = {
-              format = {
-                enable = true,
-              },
-              validate = { enable = true },
-            },
-          },
-        },
-      },
+      -- diagnostics = {
+      --   virtual_text = false,
+      -- },
     },
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
@@ -39,10 +18,8 @@ return {
     opts = {
       ensure_installed = {
         -- python
-        "flake8",
         "ruff",
         "black",
-        "pyright",
         -- lua
         "lua-language-server",
         "stylua",
@@ -58,6 +35,7 @@ return {
       opts = function(_, opts)
         local nls = require("null-ls")
         local sources = {
+          nls.builtins.formatting.isort,
           nls.builtins.formatting.black,
           nls.builtins.diagnostics.ruff,
         }
