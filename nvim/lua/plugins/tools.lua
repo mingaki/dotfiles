@@ -9,16 +9,6 @@ return {
     } },
   },
   {
-    "stevearc/overseer.nvim",
-    cmd = { "OverseerRun", "OverseerToggle" },
-    keys = {
-      { "<leader>r", desc = "Run tasks (Overseer)+" },
-      { "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Overseer: toggle task list" },
-      { "<leader>rr", "<cmd>OverseerRun<cr>", desc = "Overseer: run task" },
-    },
-    config = true,
-  },
-  {
     "kiyoon/jupynium.nvim",
     build = "/Users/claude/.pyenv/versions/py3nvim/bin/pip3 install .",
     opts = {
@@ -113,5 +103,14 @@ return {
       end
       vim.api.nvim_create_user_command("JupyniumToggleREPL", connect_repl, { nargs = "?" })
     end,
+  },
+  {
+    "pwntester/octo.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {},
   },
 }

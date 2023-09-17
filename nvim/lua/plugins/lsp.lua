@@ -2,9 +2,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      -- diagnostics = {
-      --   virtual_text = false,
-      -- },
+      diagnostics = {
+        virtual_text = false,
+      },
     },
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()

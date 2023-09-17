@@ -8,38 +8,6 @@ return {
           { "name", highlight = "NeoTreeMessage" },
         },
       },
-      default_component_configs = {
-        icon = {
-          folder_empty = "󰜌",
-          folder_empty_open = "󰜌",
-        },
-        git_status = {
-          symbols = {
-            renamed = "󰁕",
-            unstaged = "󰄱",
-          },
-        },
-      },
-      document_symbols = {
-        kinds = {
-          File = { icon = "󰈙", hl = "Tag" },
-          Namespace = { icon = "󰌗", hl = "Include" },
-          Package = { icon = "󰏖", hl = "Label" },
-          Class = { icon = "󰌗", hl = "Include" },
-          Property = { icon = "󰆧", hl = "@property" },
-          Enum = { icon = "󰒻", hl = "@number" },
-          Function = { icon = "󰊕", hl = "Function" },
-          String = { icon = "󰀬", hl = "String" },
-          Number = { icon = "󰎠", hl = "Number" },
-          Array = { icon = "󰅪", hl = "Type" },
-          Object = { icon = "󰅩", hl = "Type" },
-          Key = { icon = "󰌋", hl = "" },
-          Struct = { icon = "󰌗", hl = "Type" },
-          Operator = { icon = "󰆕", hl = "Operator" },
-          TypeParameter = { icon = "󰊄", hl = "Type" },
-          StaticMethod = { icon = "󰠄 ", hl = "Function" },
-        },
-      },
       filesystem = {
         filtered_items = {
           hide_dotfiles = false,
@@ -113,98 +81,6 @@ return {
     keys = {
       { "<leader>sr", function() require("spectre").open_file_search({select_word=true}) end, desc = "Replace in current file (Spectre)" },
       { "<leader>sR", function() require("spectre").open({select_word=true}) end, desc = "Replace in files (Spectre)" },
-    },
-  },
-  {
-    "mrjones2014/smart-splits.nvim",
-    keys = {
-      -- resize
-      {
-        "<C-Left>",
-        function()
-          require("smart-splits").resize_left()
-        end,
-        desc = "Resize window left",
-      },
-      {
-        "<C-Down>",
-        function()
-          require("smart-splits").resize_down()
-        end,
-        desc = "Resize window down",
-      },
-      {
-        "<C-Up>",
-        function()
-          require("smart-splits").resize_up()
-        end,
-        desc = "Resize window up",
-      },
-      {
-        "<C-Right>",
-        function()
-          require("smart-splits").resize_right()
-        end,
-        desc = "Resize window right",
-      },
-      -- move
-      {
-        "<C-h>",
-        function()
-          require("smart-splits").move_cursor_left()
-        end,
-        desc = "Move cursor left",
-      },
-      {
-        "<C-j>",
-        function()
-          require("smart-splits").move_cursor_down()
-        end,
-        desc = "Move cursor down",
-      },
-      {
-        "<C-k>",
-        function()
-          require("smart-splits").move_cursor_up()
-        end,
-        desc = "Move cursor up",
-      },
-      {
-        "<C-l>",
-        function()
-          require("smart-splits").move_cursor_right()
-        end,
-        desc = "Move cursor right",
-      },
-      -- swap
-      {
-        "<leader>wh",
-        function()
-          require("smart-splits").swap_buf_left()
-        end,
-        desc = "Swap buffer left",
-      },
-      {
-        "<leader>wj",
-        function()
-          require("smart-splits").swap_buf_down()
-        end,
-        desc = "Swap buffer down",
-      },
-      {
-        "<leader>wk",
-        function()
-          require("smart-splits").swap_buf_up()
-        end,
-        desc = "Swap buffer up",
-      },
-      {
-        "<leader>wl",
-        function()
-          require("smart-splits").swap_buf_right()
-        end,
-        desc = "Swap buffer right",
-      },
     },
   },
   {

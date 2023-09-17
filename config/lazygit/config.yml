@@ -7,26 +7,16 @@ gui:
   showIcons: true
   theme:
     defaultFgColor:
-      - "#555555"
+      - "#2C363C"
     activeBorderColor:
       - ""
       - bold
     inactiveBorderColor:
       - ""
     selectedLineBgColor:
-      - "#CCCCCC"
+      - "#CBD9E3"
     selectedRangeBgColor:
-      - "#CCCCCC"
-customCommands:
-  - key: "W"
-    prompts:
-      - type: "input"
-        title: "Commit"
-        initialValue: ""
-    command: git commit -m "{{index .PromptResponses 0}}" --no-verify
-    context: "global"
-    subprocess: true
-    description: "git commit ignoring pre-commit hook (custom)"
+      - "#CBD9E3"
 os:
-  editCommand: 'edit-nvim-lazygit.sh'
-  editCommandTemplate: '{{editor}} {{filename}} {{line}}'
+  editCommand: "edit-nvim-lazygit.sh"
+  editCommandTemplate: "{{editor}} {{filename}} {{line}}"
