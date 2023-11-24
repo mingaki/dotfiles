@@ -18,32 +18,6 @@
                 },
                 "rules": [
                     {
-                        "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_control"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Vi Visual Mode",
                         "manipulators": [
                             {
@@ -1638,16 +1612,9 @@
                                         "select_input_source": {
                                             "language": "zh-Hans"
                                         }
-                                    },
-                                    {
-                                        "key_code": "caps_lock"
                                     }
                                 ],
-                                "to_after_key_up": [
-                                    {
-                                        "key_code": "caps_lock"
-                                    }
-                                ],
+                                "to_after_key_up": [],
                                 "type": "basic"
                             },
                             {
@@ -1667,14 +1634,33 @@
                                         "select_input_source": {
                                             "input_mode_id": "com.apple.inputmethod.Japanese"
                                         }
-                                    },
-                                    {
-                                        "key_code": "caps_lock"
                                     }
                                 ],
-                                "to_after_key_up": [
+                                "to_after_key_up": [],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
                                     {
-                                        "key_code": "caps_lock"
+                                        "key_code": "left_control"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape"
                                     }
                                 ],
                                 "type": "basic"
@@ -1900,21 +1886,21 @@
                     "simple_modifications": [
                         {
                             "from": {
-                                "key_code": "left_option"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "left_command"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
                                 "key_code": "left_command"
                             },
                             "to": [
                                 {
                                     "key_code": "left_option"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "left_option"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "left_command"
                                 }
                             ]
                         }
