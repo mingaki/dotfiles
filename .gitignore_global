@@ -6,6 +6,7 @@
 .idea
 
 # python
+.python-version
 .venv
 venv
 __pycache__
