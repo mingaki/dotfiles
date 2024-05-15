@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = {
         "aerial",
         "aerial-nav",
+        "molten_output",
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false

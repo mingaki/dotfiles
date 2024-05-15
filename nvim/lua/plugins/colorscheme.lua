@@ -13,7 +13,7 @@ function Get_system_mode()
 end
 
 function Get_mode_theme(mode)
-    local mode_themes = { day = "zenbones", night = "seoulbones" }
+    local mode_themes = { day = "rose-pine", night = "seoulbones" }
     local theme = mode_themes[mode]
     if not theme then
         theme = "dayfox"
@@ -132,6 +132,9 @@ return {
                         vim.api.nvim_set_hl(0, "NotifyINFOIcon", { fg = "#749169" })
                         vim.api.nvim_set_hl(0, "NotifyINFOTitle", { fg = "#749169" })
                     end
+
+                    vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#3c4146" })
+
                     local statement_fg = vim.api.nvim_get_hl(0, { name = "Statement" }).fg
                     vim.api.nvim_set_hl(0, "@keyword.function", { bold = true, italic = true, fg = statement_fg })
                     vim.api.nvim_set_hl(0, "@keyword", { bold = true, italic = true, fg = statement_fg })
@@ -151,6 +154,20 @@ return {
                     vim.api.nvim_set_hl(0, "NeotestSkipped", { link = "NeoTreeDotfile" })
                     vim.api.nvim_set_hl(0, "NeotestWinselect", { link = "NeoTreeDotfile" })
                 end,
+            })
+        end,
+    },
+    {
+        "rose-pine/neovim",
+        config = function()
+            require("rose-pine").setup({
+                highlight_groups = {
+                    String = { fg = "#468779" },
+                    ColorColumn = { bg = "#ede9e4" },
+                    LspReferenceRead = { bg = "NONE", underline = true },
+                    LspReferenceText = { bg = "NONE", underline = true },
+                    LspReferenceWrite = { bg = "NONE", underline = true },
+                },
             })
         end,
     },

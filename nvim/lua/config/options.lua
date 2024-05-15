@@ -7,3 +7,7 @@ opt.formatoptions = "jqlnt"
 opt.cursorline = false
 opt.shiftwidth = 4
 opt.tabstop = 4
+
+vim.g.python3_host_prog = vim.fn.expand("~/.pyenv/versions/neovim/bin/python")
+vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_ruff = "ruff"

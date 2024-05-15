@@ -34,7 +34,7 @@ set_mode() {
 	write_mode_to_state $mode
 
 	if [[ $mode = "day" ]]; then
-		local kitty_theme="zenbones_light"
+		local kitty_theme="rose-pine-dawn"
 	else
 		local kitty_theme="seoulbones_dark"
 	fi

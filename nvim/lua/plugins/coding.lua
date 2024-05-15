@@ -3,7 +3,7 @@ return {
         "danymat/neogen",
         keys = {
             {
-                "<leader>cC",
+                "<leader>cG",
                 function()
                     local neogen = require("neogen")
                     local filetype = vim.bo.filetype
@@ -17,7 +17,7 @@ return {
                 desc = "Neogen set convention",
             },
             {
-                "<leader>cc",
+                "<leader>cg",
                 function()
                     local neogen = require("neogen")
                     if neogen.conventions ~= nil then
@@ -63,24 +63,7 @@ return {
         opts = function(_, opts)
             -- add jupynium source
             local cmp = require("cmp")
-            opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "jupynium", priority = 1000 } }))
-            opts.formatting = {
-                format = function(entry, item)
-                    local icons = require("lazyvim.config").icons.kinds
-                    if icons[item.kind] then
-                        item.kind = icons[item.kind] .. item.kind
-                    end
-                    item.menu = ({
-                        buffer = "[Buffer]",
-                        nvim_lsp = "[LSP]",
-                        luasnip = "[LuaSnip]",
-                        nvim_lua = "[Lua]",
-                        latex_symbols = "[LaTeX]",
-                        jupynium = "[Jupynium]",
-                    })[entry.source.name]
-                    return item
-                end,
-            }
+            opts.sources = cmp.config.sources(vim.list_extend({ { name = "otter" } }, opts.sources))
             opts.completion.completeopt = opts.completion.completeopt .. ",noselect"
             opts.preselect = cmp.PreselectMode.None
             -- SuperTab
@@ -128,5 +111,19 @@ return {
                 desc = "Close cmp menu",
             },
         },
+    },
+    {
+        "L3MON4D3/LuaSnip",
+        config = function()
+            local ls = require("luasnip")
+            ls.setup({
+                link_children = true,
+                link_roots = false,
+                keep_roots = false,
+                update_events = { "TextChanged", "TextChangedI" },
+            })
+
+            vim.cmd.runtime({ args = { "lua/snippets/*.lua" }, bang = true }) -- load custom snippets
+        end,
     },
 }

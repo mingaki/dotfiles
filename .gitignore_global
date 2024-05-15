@@ -8,5 +8,6 @@
 # python
 .python-version
 .venv
+.ipynb_checkpoints
 venv
 __pycache__

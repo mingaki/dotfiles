@@ -44,6 +44,17 @@ return {
                         return { "--hidden" }
                     end,
                 },
+                buffers = {
+                    mappings = {
+                        i = {
+                            ["<c-x>"] = function(prompt_bufnr)
+                                local actions = require("telescope.actions")
+                                actions.delete_buffer(prompt_bufnr)
+                                -- actions.move_to_top(prompt_bufnr)
+                            end,
+                        },
+                    },
+                },
             },
             defaults = {
                 file_ignore_patterns = { ".git/", "node_modules", ".venv" },
@@ -52,11 +63,6 @@ return {
                         ["<C-o>"] = function(prompt_bufnr)
                             require("telescope.actions").select_default(prompt_bufnr)
                             require("telescope.builtin").resume()
-                        end,
-                        ["<c-x>"] = function(prompt_bufnr)
-                            local actions = require("telescope.actions")
-                            actions.delete_buffer(prompt_bufnr)
-                            actions.move_to_top(prompt_bufnr)
                         end,
                         ["<c-s>"] = require("telescope.actions").select_horizontal,
                     },
