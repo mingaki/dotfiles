@@ -126,4 +126,17 @@ return {
             vim.cmd.runtime({ args = { "lua/snippets/*.lua" }, bang = true }) -- load custom snippets
         end,
     },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        cmd = "LazyDev",
+        opts = {
+            library = {
+                "plenary.nvim",
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+                { path = "LazyVim", words = { "LazyVim" } },
+                { path = "lazy.nvim", words = { "LazyVim" } },
+            },
+        },
+    },
 }

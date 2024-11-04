@@ -1,6 +1,6 @@
 [user]
 name = Guan Ming
-email = gm932015@gmail.com
+email = claude_g@outlook.com
 
 [color]
 ui = true
@@ -17,12 +17,12 @@ ui = true
 	light = true
   side-by-side = false
   line-numbers = true
-  syntax-theme = base16
-  line-numbers-minus-style = green
-  line-numbers-plus-style  = red
-  line-numbers-zero-style  = brightwhite
-  minus-style = black red
-  plus-style  = black green
+  ; syntax-theme = GitHub
+  ; line-numbers-minus-style = green
+  ; line-numbers-plus-style  = red
+  ; line-numbers-zero-style  = brightwhite
+  ; minus-style = black red
+  plus-style  = white "#d5f0d5"
 
 [merge]
   conflictstyle = diff3
@@ -30,12 +30,11 @@ ui = true
 [diff]
   colorMoved = default
 
-[credential]
-	helper = store
-[credential "https://github.com"]
-  helper =
-	helper = !gh auth git-credential
-[credential "https://gist.github.com"]
-  helper =
-	helper = !gh auth git-credential
-
+[maintenance]
+	repo = /Users/claude/.zplugins/zsh-snap
+	repo = /Users/claude/.zplugins/jeffreytse/zsh-vi-mode
+	repo = /Users/claude/.zplugins/lukechilds/zsh-nvm
+	repo = /Users/claude/.zplugins/romkatv/powerlevel10k
+	repo = /Users/claude/.zplugins/zsh-users/zsh-autosuggestions
+	repo = /Users/claude/.zplugins/zsh-users/zsh-completions
+	repo = /Users/claude/.zplugins/zsh-users/zsh-syntax-highlighting

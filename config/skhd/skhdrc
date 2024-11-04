@@ -103,3 +103,6 @@ alt + ctrl - h: yabai -m window --stack west
 alt + ctrl - j: yabai -m window --stack south
 alt + ctrl - k: yabai -m window --stack north
 alt + ctrl - l: yabai -m window --stack east
+
+# quake
+cmd - escape : ddterm

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+WINDOW_TITLE="ddterm"
+WINDOW_ID=$(yabai -m query --windows | jq -e ".[] | select(.title==\"$WINDOW_TITLE\") | .id") || true
+if [[ -z "$WINDOW_ID" ]]; then
+	pgrep -x kitty >/dev/null &&
+		kitty @ new-window --title "$WINDOW_TITLE" -1 --listen-on unix:/tmp/ddterm --instance-group scratchpad -o macos_hide_from_tasks=yes -o background_opacity=1.0 -o macos_quit_when_last_window_closed=yes ||
+		open -na /Applications/Kitty.app --args --title "$WINDOW_TITLE"
+else
+	WINDOW_QUERY=$(yabai -m query --windows --window "$WINDOW_ID")
+	IS_HIDDEN=$(echo "$WINDOW_QUERY" | jq '."is-hidden"')
+	HAS_FOCUS=$(echo "$WINDOW_QUERY" | jq '."has-focus"')
+	if [[ "${HAS_FOCUS}" != "true" ]]; then
+		# yabai -m window "$WINDOW_ID" --space mouse --move abs:0:0 --grid "10:1:0:0:1:6" --sub-layer above --focus
+		yabai -m window "$WINDOW_ID" --space mouse --move abs:0:0 --sub-layer above --focus
+	fi
+	if [[ "${IS_HIDDEN}" != "true" ]]; then
+		skhd -k "cmd - h"
+	fi
+fi

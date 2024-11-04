@@ -1,4 +1,3 @@
-Daynight_mode = ""
 local filepath = "~/.config/state.yml"
 
 function Get_system_mode()
@@ -15,8 +14,8 @@ end
 function Get_mode_theme(mode)
     local mode_themes = { day = "rose-pine", night = "seoulbones" }
     local theme = mode_themes[mode]
-    if not theme then
-        theme = "dayfox"
+    if theme == nil then
+        theme = mode_themes["day"]
     end
     return theme
 end
@@ -24,8 +23,10 @@ end
 function Set_background(mode)
     if mode == "day" then
         vim.cmd("set background=light")
-    else
+    elseif mode == "night" then
         vim.cmd("set background=dark")
+    else
+        vim.cmd("set background=light")
     end
 end
 
@@ -57,9 +58,11 @@ return {
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = function()
-                Sync_mode()
-            end,
+            colorscheme = "dawnfox",
+            -- colorscheme = function()
+            --     local sys_mode = Get_system_mode()
+            --     Set_mode(sys_mode)
+            -- end,
         },
     },
     {
@@ -80,6 +83,17 @@ return {
                 },
                 dayfox = {
                     LspReferenceText = { bg = "#cfd1c9" },
+                },
+                dawnfox = {
+                    Type = { fg = "#8f7738" },
+                    NeoTreeGitModified = { fg = "#b0995b" },
+                    FzfLuaHeaderBind = { fg = "#a0c46e" },
+                    FzfLuaPathLineNr = { fg = "#a0c46e" },
+                    FzfLuaTabMarker = { fg = "#a0c46e" },
+                    FzfLuaCursorLine = { fg = "#5b7082", bg = "#ebdfe4" },
+                    LspReferenceRead = { bg = "#e2e6d8" },
+                    LspReferenceWrite = { bg = "#e2e6d8" },
+                    LspReferenceText = { bg = "#e2e6d8" },
                 },
             },
         },
@@ -121,6 +135,7 @@ return {
     {
         "mcchrish/zenbones.nvim",
         dependencies = { "rktjmp/lush.nvim" },
+        enabled = false,
         config = function()
             vim.api.nvim_create_autocmd("ColorScheme", {
                 pattern = { "seoulbones", "zenbones" },
@@ -167,6 +182,7 @@ return {
                     LspReferenceRead = { bg = "NONE", underline = true },
                     LspReferenceText = { bg = "NONE", underline = true },
                     LspReferenceWrite = { bg = "NONE", underline = true },
+                    FzfLuaPathLineNr = { fg = "#56949f" },
                 },
             })
         end,

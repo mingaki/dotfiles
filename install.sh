@@ -58,7 +58,6 @@ apps=(
 	1password/tap/1password-cli
 	alfred
 	anki
-	docker
 	doll
 	eudic
 	firefox

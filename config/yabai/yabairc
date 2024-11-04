@@ -34,14 +34,14 @@ yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
 
-# layout 
-yabai -m config external_bar                 all:27:0
+# layout
+# yabai -m config external_bar                 all:27:0
 yabai -m config layout                       bsp
-yabai -m config top_padding                  8
-yabai -m config bottom_padding               8
-yabai -m config left_padding                 8
-yabai -m config right_padding                8
-yabai -m config window_gap                   8
+# yabai -m config top_padding                  8
+# yabai -m config bottom_padding               8
+# yabai -m config left_padding                 8
+# yabai -m config right_padding                8
+# yabai -m config window_gap                   8
 
 # apps to not manage (ignore)
 # system
@@ -61,6 +61,7 @@ yabai -m rule --add app="Anki" manage=off
 yabai -m rule --add app="Archive Utility" manage=off
 yabai -m rule --add app="Docker Desktop" manage=off
 yabai -m rule --add app="EuDic" manage=off
+yabai -m rule --add app="ForkLift" manage=off sticky=on
 yabai -m rule --add app="IINA" manage=off
 yabai -m rule --add app="Logitech G HUB" manage=off
 yabai -m rule --add app="MarkText" manage=off
@@ -85,5 +86,6 @@ yabai -m rule --add title=".*Preferences$" manage=off
 yabai -m rule --add title="General" manage=off
 yabai -m rule --add title="^Tip of the Day$" manage=off # Jetbrains
 yabai -m rule --add title="scratchpad" manage=off sticky=on grid=10:10:1:1:8:8
+yabai -m rule --add title="ddterm" manage=off grid="10:1:0:0:1:6"
 
 # YABAI_CERT=yabai-cert sh -c "$(curl -fsSL "https://git.io/update-yabai")" &

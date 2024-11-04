@@ -1,4 +1,47 @@
 return {
+    ---@type LazySpec
+    {
+        "mikavilpas/yazi.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        keys = {
+            {
+                "<leader>y",
+                function()
+                    require("yazi").yazi()
+                end,
+                desc = "Yazi (Root Dir)",
+            },
+            {
+                -- Open in the current working directory
+                "<leader>Y",
+                function()
+                    require("yazi").yazi(nil, vim.fn.getcwd())
+                end,
+                desc = "Yazi (cwd)",
+            },
+        },
+    },
+    {
+        "stevearc/oil.nvim",
+        ---@module 'oil'
+        ---@type oil.SetupOpts
+        opts = {
+            default_file_explorer = true,
+        },
+        -- Optional dependencies
+        dependencies = { { "echasnovski/mini.icons", opts = {} } },
+        lazy = false,
+        keys = {
+            {
+                "-",
+                "<cmd>Oil<cr>",
+                mode = "n",
+                desc = "Open Parent Directory in Oil",
+            },
+        },
+    },
     {
         "nvim-neo-tree/neo-tree.nvim",
         opts = {
@@ -15,6 +58,7 @@ return {
                     never_show = { ".git", ".venv", "node_modules", ".DS_Store" },
                     never_show_by_pattern = { "*cache" },
                 },
+                hijack_netrw_behavior = "disabled",
             },
             window = {
                 mappings = {
@@ -29,6 +73,7 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
+        version = "*",
         dependencies = {
             "nvim-telescope/telescope-fzf-native.nvim",
             build = "make",
@@ -75,14 +120,35 @@ return {
         },
     },
     {
+        "ibhagwan/fzf-lua",
+        opts = {
+            winopts = {
+                backdrop = 100,
+            },
+        },
+    },
+    {
         "folke/trouble.nvim",
+        opts = {
+            win = { size = 0.25 },
+        },
         keys = {
-            { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-            { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=true<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cS",
+                "<cmd>Trouble lsp toggle focus=true<cr>",
+                desc = "LSP references/definitions/... (Trouble)",
+            },
         },
     },
     {
         "Iron-E/nvim-bufmode",
+        enabled = false,
         cmd = "BufmodeEnter",
         dependencies = {
             "Iron-E/nvim-libmodal",

@@ -1,8 +1,3 @@
-# Powerlevel10k instant prompt at the top
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # init znap
 ZPLUGIN_DIR="$HOME/.zplugins"
 [[ -f $ZPLUGIN_DIR/zsh-snap/znap.zsh ]] ||
@@ -10,55 +5,36 @@ ZPLUGIN_DIR="$HOME/.zplugins"
         https://github.com/marlonrichert/zsh-snap.git $ZPLUGIN_DIR/zsh-snap
 source $ZPLUGIN_DIR/zsh-snap/znap.zsh
 
-znap source romkatv/powerlevel10k
-
 ZVM_INIT_MODE=sourcing
 znap source jeffreytse/zsh-vi-mode
-
-
-znap function _pyenv pyenv              'eval "$( pyenv init - --no-rehash )"'
-compctl -K    _pyenv pyenv
-
-znap function _pip_completion pip       'eval "$( pip completion --zsh )"'
-compctl -K    _pip_completion pip
-
-znap function _pipenv pipenv            'eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"'
-compdef       _pipenv pipenv
 
 # opts
 export EDITOR="$(which nvim)"
 export VISUAL="$(which nvim)"
 
-export PIPENV_VENV_IN_PROJECT=1
-
 zstyle ':completion:*' menu select
 
-eval "$(zoxide init zsh)"
-eval "$(github-copilot-cli alias -- "$0")"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(open {})+abort' --color=bg+:#4d688e,pointer:#b1d196"
+# export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(open {})+abort' --color=bg+:#4d688e,pointer:#b1d196"
+# dawnfox fzf
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#575279,fg+:#575279,bg:#faf4ed,bg+:#d0d8d8
+  --color=hl:#618774,hl+:#618774,info:#d7827e,marker:#c26d85
+  --color=prompt:#286983,spinner:#9a80b9,pointer:#9a80b9,header:#aa8148
+  --color=gutter:#faf4ed,border:#262626,label:#aeaeae,query:#618774
+  --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
+  --marker="*" --pointer="◆" --separator="─" --scrollbar="│"'
 
 export CHTSH_QUERY_OPTIONS="style=trac"
 
-# nnn
-BLK="0B" CHR="0B" DIR="04" EXE="06" REG="00" HARDLINK="06" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="06" SOCK="0B" OTHER="06"
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-
-n () {
-    if [[ "${NNNLVL:-0}" -ge 1 ]]; then
-        echo "nnn is already running"
-        return
-    fi
-
-    NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    \nnn "$@"
-
-    if [ -f "$NNN_TMPFILE" ]; then
-            . "$NNN_TMPFILE"
-            rm -f "$NNN_TMPFILE" > /dev/null
-    fi
+# yazi
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
 load_env() {
@@ -80,7 +56,8 @@ load_env() {
 # aliases
 alias ..="cd .."
 alias ll="ls -l"
-alias cl="clear"
+alias l="eza -l -a --icons --git"
+alias lt="eza --tree --level=2 --long --icons --git"
 
 alias ga="git add"
 alias gc="git commit"
@@ -94,29 +71,28 @@ alias ltg="leetgo"
 
 alias ta="tmux attach"
 alias tn="tmux new -s"
-alias n="n -A"
 alias v="nvim"
 alias nv="nvim"
 alias help="tldr"
 alias top="btop"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 
-alias per="pipenv run"
-alias pes="pipenv shell"
-alias pei="pipenv install"
 alias proxyon='export http_proxy=127.0.0.1:7890;export https_proxy=$http_proxy'
 alias proxyoff='unset http_proxy;unset https_proxy'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(zoxide init zsh)"
+eval "$(github-copilot-cli alias -- "$0")"
+
+# eval "$(starship init zsh)"
+znap eval starship 'starship init zsh --print-full-init'
+znap prompt
 
 # zsh plugins
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929ca6"
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-completions
 
-export NVM_LAZY_LOAD=true
-znap source lukechilds/zsh-nvm
+eval "$(mise activate zsh)"
 
 # must be sourced at the end
 znap source zsh-users/zsh-syntax-highlighting

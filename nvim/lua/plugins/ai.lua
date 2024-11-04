@@ -1,14 +1,3 @@
-local function toggle_copilot()
-    local client_list = vim.lsp.get_active_clients({ name = "copilot" })
-    local is_enabled = #client_list > 0
-
-    if is_enabled then
-        vim.cmd("Copilot disable")
-    else
-        vim.cmd("Copilot enable")
-    end
-end
-
 return {
     {
         "zbirenbaum/copilot.lua",
@@ -33,11 +22,12 @@ return {
             },
         },
         keys = {
-            { "<leader>ua", toggle_copilot, desc = "Toggle Copilot" },
+            { "<leader>ua", "<cmd>Copilot toggle<CR>", desc = "Toggle Copilot" },
         },
     },
     {
         "jackMort/ChatGPT.nvim",
+        enabled = false,
         config = function()
             require("chatgpt").setup({
                 edit_with_instructions = {
@@ -47,7 +37,7 @@ return {
                     },
                 },
                 openai_params = {
-                    model = "gpt-4",
+                    model = "gpt-4o",
                 },
             })
         end,
@@ -87,7 +77,6 @@ return {
         dependencies = {
             "MunifTanjim/nui.nvim",
             "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
         },
     },
 }

@@ -6,17 +6,24 @@ git:
 gui:
   showIcons: true
   theme:
-    defaultFgColor:
-      - "#2C363C"
+    #   defaultFgColor:
+    #     - "#575279"
+    #   activeBorderColor:
+    #     - "#286983"
+    #     - bold
+    #   inactiveBorderColor:
+    #     - "#dfdad9"
+    selectedLineBgColor:
+      - "#dfdad9"
+    selectedRangeBgColor:
+      - "#dfdad9"
     activeBorderColor:
-      - ""
+      - "#286983"
       - bold
     inactiveBorderColor:
-      - ""
-    selectedLineBgColor:
-      - "#CBD9E3"
-    selectedRangeBgColor:
-      - "#CBD9E3"
+      - "#dfdad9"
+    defaultFgColor:
+      - "#575279"
 os:
   editCommand: "edit-nvim-lazygit.sh"
   editCommandTemplate: "{{editor}} {{filename}} {{line}}"
