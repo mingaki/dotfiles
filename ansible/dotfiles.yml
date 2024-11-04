@@ -64,12 +64,6 @@
         dest: "{{ home_dir }}/.local/scripts"
         state: link
 
-    - name: Link Hammerspoon
-      file:
-        src: "{{ dotfiles_dir }}/hammerspoon"
-        dest: "{{ home_dir }}/.hammerspoon"
-        state: link
-
     - name: Link gitignore_global
       file:
         src: "{{ dotfiles_dir }}/.gitignore_global"
