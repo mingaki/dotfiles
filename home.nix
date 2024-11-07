@@ -40,6 +40,9 @@
     # nix
     nil
     nixfmt-rfc-style
+    # markdown
+    marksman
+    markdownlint-cli2
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
