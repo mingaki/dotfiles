@@ -3,5 +3,6 @@ return {
     { "echasnovski/mini.surround", enabled = false },
     { "folke/tokyonight.nvim", enabled = false },
     { "linux-cultist/venv-selector.nvim", enabled = false },
-    { "iamcco/markdown-preview.nvim", enabled = false },
+    { "williamboman/mason-lspconfig.nvim", enabled = false },
+    { "williamboman/mason.nvim", enabled = false },
 }

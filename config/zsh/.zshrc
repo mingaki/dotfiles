@@ -77,15 +77,13 @@ alias help="tldr"
 alias top="btop"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 
+alias gh="op plugin run -- gh"
+
 alias proxyon='export http_proxy=127.0.0.1:7890;export https_proxy=$http_proxy'
 alias proxyoff='unset http_proxy;unset https_proxy'
 
 eval "$(zoxide init zsh)"
-eval "$(github-copilot-cli alias -- "$0")"
-
-# eval "$(starship init zsh)"
-znap eval starship 'starship init zsh --print-full-init'
-znap prompt
+eval "$(starship init zsh)"
 
 # zsh plugins
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929ca6"
