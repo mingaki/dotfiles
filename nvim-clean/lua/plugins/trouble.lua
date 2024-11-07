@@ -27,13 +27,13 @@ return {
     keys = {
       {
         "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=true<cr>",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
         desc = "Symbols (Trouble)",
       },
       {
         "<leader>cS",
-        "<cmd>Trouble lsp toggle focus=true<cr>",
-        desc = "LSP references/definitions/... (Trouble)",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
       },
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
