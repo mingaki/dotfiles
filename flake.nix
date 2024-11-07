@@ -106,7 +106,7 @@
         };
     in
     {
-      darwinConfigurations."Guans-Mac-mini" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."apple-silicon" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           configuration
