@@ -82,4 +82,63 @@ return {
       },
     },
   },
+  {
+    "folke/ts-comments.nvim",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    "danymat/neogen",
+    keys = {
+      {
+        "<leader>cG",
+        function()
+          local neogen = require("neogen")
+          local filetype = vim.bo.filetype
+          local convention = vim.fn.input("Covention for " .. filetype .. ": ")
+          if neogen.conventions ~= nil then
+            neogen.conventions[filetype] = convention
+          else
+            neogen.conventions = { [filetype] = convention }
+          end
+        end,
+        desc = "Neogen set convention",
+      },
+      {
+        "<leader>cg",
+        function()
+          local neogen = require("neogen")
+          if neogen.conventions ~= nil then
+            neogen.generate({ annotation_convention = neogen.conventions })
+          else
+            neogen.generate({})
+          end
+        end,
+        desc = "Neogen Comment",
+      },
+    },
+    opts = { snippet_engine = "luasnip" },
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "VeryLazy",
+    vscode = true,
+    config = function()
+      require("nvim-autopairs").setup({})
+    end,
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    vscode = true,
+    config = function()
+      require("nvim-surround").setup({
+        keymaps = {
+          visual = "z",
+        },
+      })
+    end,
+  },
 }

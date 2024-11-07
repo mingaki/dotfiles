@@ -22,7 +22,6 @@
     heroku
     jq
     lazydocker
-    mise
     neovim
     nodejs # needed for copilot.vim
     ripgrep
