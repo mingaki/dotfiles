@@ -57,7 +57,6 @@
     ".config/karabiner".source = ./config/karabiner;
     ".config/kitty".source = ./config/kitty;
     ".config/lazygit/config.yml".source = ./config/lazygit/config.yml;
-    ".config/sketchybar".source = ./config/sketchybar;
     ".config/skhd".source = ./config/skhd;
     ".config/starship.toml".source = ./config/starship.toml;
     ".config/yabai".source = ./config/yabai;
