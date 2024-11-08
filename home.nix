@@ -20,6 +20,8 @@
     fzf
     gh
     heroku
+    lazygit
+    starship
     jq
     lazydocker
     neovim
@@ -49,14 +51,12 @@
   # plain files is through 'home.file'.
   home.file = {
     # dotfiles
-    # https://old.reddit.com/r/NixOS/comments/108fwwh/tradeoffs_of_using_home_manager_for_neovim_plugins/
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-clean";
-
-    ".zprofile".source = ./config/zsh/.zprofile;
     ".zshrc".source = ./config/zsh/.zshrc;
+    ".zprofile".source = ./config/zsh/.zprofile;
     ".config/bat".source = ./config/bat;
     ".config/karabiner".source = ./config/karabiner;
     ".config/kitty".source = ./config/kitty;
+    ".config/lazygit/config.yml".source = ./config/lazygit/config.yml;
     ".config/sketchybar".source = ./config/sketchybar;
     ".config/skhd".source = ./config/skhd;
     ".config/starship.toml".source = ./config/starship.toml;
@@ -68,37 +68,59 @@
     ".gitignore_global".source = ./.gitignore_global;
     # scripts
     ".local/scripts".source = ./scripts;
+
+    # https://old.reddit.com/r/NixOS/comments/108fwwh/tradeoffs_of_using_home_manager_for_neovim_plugins/
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-clean";
   };
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestion = {
+      enable = true;
+      highlight = "fg=#929ca6";
+    };
+    syntaxHighlighting.enable = true;
+    plugins = [
+      {
+        name = "zsh-vi-mode";
+        src = "${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+    ];
+    initExtra = ''
+      source <(fzf --zsh)
+    '';
+    shellAliases = {
+
+      ".." = "cd ..";
+      ll = "ls -l";
+      l = "eza -l -a --icons --git";
+      lt = "eza --tree --level=2 --long --icons --git";
+
+      ga = "git add";
+      gc = "git commit";
+      gp = "git pull";
+      gP = "git push";
+      gst = "git status";
+
+      ta = "tmux attach";
+      tn = "tmux new -s";
+
+      v = "nvim";
+      nv = "nvim";
+
+      lg = "lazygit";
+      ltg = "leetgo";
+
+      help = "tldr";
+      top = "btop";
+      preview = "fzf --preview 'bat --color \"always\" {}'";
+
+      ogh = "op plugin run -- gh";
+
+      proxyon = "export http_proxy=127.0.0.1:7890;export https_proxy=$http_proxy";
+      proxyoff = "unset http_proxy;unset https_proxy";
+    };
+  };
+
   programs.home-manager.enable = true;
-  programs.starship.enable = true;
-
-  programs.lazygit.enable = true;
-  programs.lazygit.settings = {
-    git.paging = {
-      useConfig = false;
-      colorArg = "always";
-      pager = "delta --paging=never";
-    };
-    gui = {
-      showIcons = true;
-      theme = {
-        selectedLineBgColor = [ "#dfdad9" ];
-        selectedRangeBgColor = [ "#dfdad9" ];
-        activeBorderColor = [
-          "#286983"
-          "bold"
-        ];
-        inactiveBorderColor = [ "#dfdad9" ];
-        defaultFgColor = [ "#575279" ];
-      };
-    };
-    os = {
-      editCommand = "edit-nvim-lazygit.sh";
-      editCommandTemplate = "{{editor}} {{filename}} {{line}}";
-    };
-  };
-
-  xdg.enable = true;
 }

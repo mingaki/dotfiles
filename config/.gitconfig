@@ -25,12 +25,3 @@ ui = true
 
 [diff]
   colorMoved = default
-
-[maintenance]
-	repo = /Users/claude/.zplugins/zsh-snap
-	repo = /Users/claude/.zplugins/jeffreytse/zsh-vi-mode
-	repo = /Users/claude/.zplugins/lukechilds/zsh-nvm
-	repo = /Users/claude/.zplugins/romkatv/powerlevel10k
-	repo = /Users/claude/.zplugins/zsh-users/zsh-autosuggestions
-	repo = /Users/claude/.zplugins/zsh-users/zsh-completions
-	repo = /Users/claude/.zplugins/zsh-users/zsh-syntax-highlighting
