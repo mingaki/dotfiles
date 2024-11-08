@@ -31,6 +31,9 @@
     tmux
     yazi
     zoxide
+    # bash
+    bash-language-server
+    shfmt
     # lua
     lua-language-server
     stylua
