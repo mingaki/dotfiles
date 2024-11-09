@@ -25,7 +25,7 @@
     jq
     lazydocker
     neovim
-    nodejs # needed for copilot.vim
+    # nodejs # needed for copilot.vim
     ripgrep
     tldr
     tmux
