@@ -61,6 +61,7 @@
 
             # apps
             "1password"
+            "1password-cli"
             "clashx"
             "cyberduck"
             "google-drive"
