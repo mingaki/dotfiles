@@ -75,54 +75,6 @@
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-clean";
   };
 
-  programs.zsh = {
-    enable = true;
-    autosuggestion = {
-      enable = true;
-      highlight = "fg=#929ca6";
-    };
-    syntaxHighlighting.enable = true;
-    plugins = [
-      {
-        name = "zsh-vi-mode";
-        src = "${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-      }
-    ];
-    initExtra = ''
-      source <(fzf --zsh)
-    '';
-    shellAliases = {
-
-      ".." = "cd ..";
-      ll = "ls -l";
-      l = "eza -l -a --icons --git";
-      lt = "eza --tree --level=2 --long --icons --git";
-
-      ga = "git add";
-      gc = "git commit";
-      gp = "git pull";
-      gP = "git push";
-      gst = "git status";
-
-      ta = "tmux attach";
-      tn = "tmux new -s";
-
-      v = "nvim";
-      nv = "nvim";
-
-      lg = "lazygit";
-      ltg = "leetgo";
-
-      help = "tldr";
-      top = "btop";
-      preview = "fzf --preview 'bat --color \"always\" {}'";
-
-      ogh = "op plugin run -- gh";
-
-      proxyon = "export http_proxy=127.0.0.1:7890;export https_proxy=$http_proxy";
-      proxyoff = "unset http_proxy;unset https_proxy";
-    };
-  };
-
+  programs.zsh.enable = true;
   programs.home-manager.enable = true;
 }
