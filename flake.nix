@@ -30,6 +30,9 @@
           services.nix-daemon.enable = true;
           nix.settings.experimental-features = "nix-command flakes";
           # programs.zsh.enable = true; # default shell on catalina
+          nixpkgs.config = {
+            allowUnfree = true;
+          };
           nixpkgs.hostPlatform = "aarch64-darwin";
           security.pam.enableSudoTouchIdAuth = true;
 

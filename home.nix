@@ -25,7 +25,6 @@
     jq
     lazydocker
     neovim
-    # nodejs # needed for copilot.vim
     ripgrep
     tldr
     tmux
@@ -48,6 +47,9 @@
     # markdown
     marksman
     markdownlint-cli2
+
+    # unfree
+    terraform-docs
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
