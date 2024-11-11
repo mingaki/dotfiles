@@ -10,40 +10,54 @@
 
   # Makes sense for user specific applications that shouldn't be available system-wide
   home.packages = with pkgs; [
-    awscli
-    bat
-    btop
-    cargo
-    delta
-    eza
+    # essentials
     fd
     fzf
-    gh
-    heroku
-    lazygit
+    neovim
     starship
+    tmux
+
+    # cli utils
+    bat
+    btop
+    delta
+    eza
     jq
     lazydocker
-    neovim
+    lazygit
     ripgrep
     tldr
-    tmux
     yazi
     zoxide
+
+    # clients
+    awscli
+    gh
+    heroku
+
+    # language specific
+
+    # rust
+    cargo
+
     # bash
     bash-language-server
     shfmt
+
     # lua
     lua-language-server
     stylua
+
     # python
     black
     ruff
     pyright
     uv
+
     # nix
     nil
     nixfmt-rfc-style
+
     # markdown
     marksman
     markdownlint-cli2
