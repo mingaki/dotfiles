@@ -1,4 +1,5 @@
 return {
+  { "folke/lazy.nvim", version = "*" },
   {
     "folke/persistence.nvim",
     version = "*",
