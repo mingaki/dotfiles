@@ -88,8 +88,10 @@
     # scripts
     ".local/scripts".source = ./scripts;
 
+    # for configs that change frequently, out-of-store-symlink avoids the need of rebuilding
     # https://old.reddit.com/r/NixOS/comments/108fwwh/tradeoffs_of_using_home_manager_for_neovim_plugins/
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-clean";
+    ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace.toml";
   };
 
   programs.zsh.enable = true;
