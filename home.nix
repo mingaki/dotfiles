@@ -72,6 +72,7 @@
     # dotfiles
     ".zshrc".source = ./config/zsh/.zshrc;
     ".zprofile".source = ./config/zsh/.zprofile;
+    ".zimrc".source = ./config/zsh/.zimrc;
     ".config/bat".source = ./config/bat;
     ".config/karabiner".source = ./config/karabiner;
     ".config/kitty".source = ./config/kitty;

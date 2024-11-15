@@ -60,22 +60,20 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --marker="*" --pointer="◆" --separator="─" --scrollbar="│"'
 source <(fzf --zsh)
 
-# plugins
-install () {
-    local owner=$1
-    local repo=$2
-    local file=$3
+# manage plugins by zim
+ZIM_CONFIG_FILE=~/.zimrc
+ZIM_HOME=~/.zim
 
-    local PLUGIN_ROOT="$HOME/.zsh_plugins"
-    local PLUGIN_DIR=$PLUGIN_ROOT/$repo
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+      https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
 
-    [ ! -d $PLUGIN_DIR ] && mkdir -p "$(dirname $PLUGIN_DIR)"
-    [ ! -d $PLUGIN_DIR/.git ] && git clone https://github.com/$owner/$repo.git "$PLUGIN_DIR"
-    source "${PLUGIN_DIR}/${file}"
-}
+# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
 
-install "jeffreytse" "zsh-vi-mode" "zsh-vi-mode.plugin.zsh"
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929ca6"
-install "zsh-users" "zsh-autosuggestions" "zsh-autosuggestions.zsh"
-install "zsh-users" "zsh-syntax-highlighting" "zsh-syntax-highlighting.zsh"
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
