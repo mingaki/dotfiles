@@ -3,6 +3,7 @@ return {
   dependencies = { "echasnovski/mini.icons", opts = {} },
   opts = {
     winopts = { backdrop = 100 },
+    files = { cwd_prompt = false },
   },
   config = function(_, opts)
     local config = require("fzf-lua.config")
