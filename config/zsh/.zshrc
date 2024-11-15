@@ -14,6 +14,11 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+# avante
+function ai() {
+  export ANTHROPIC_API_KEY=$(op item get anthropic-api --format json --fields credential | jq -r .value)
+}
+
 # aliases
 alias ..="cd .."
 alias ll="ls -l"

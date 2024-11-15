@@ -22,6 +22,7 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
     },
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
       servers = {
         lua_ls = {

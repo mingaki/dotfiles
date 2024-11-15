@@ -5,10 +5,12 @@ return {
   opts_extend = { "spec" },
   opts = {
     defaults = {},
+    sort = { "alphanum", "local", "order", "group", "mod" },
     spec = {
       {
         mode = { "n", "v" },
         { "<leader><tab>", group = "tabs" },
+        { "<leader>a", group = "ai" },
         { "<leader>c", group = "code" },
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git" },
