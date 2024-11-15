@@ -13,7 +13,6 @@
     # essentials
     fd
     fzf
-    neovim
     starship
     tmux
 

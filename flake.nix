@@ -57,6 +57,7 @@
             "j178/tap/leetgo"
             "mise"
             "php"
+            "neovim"
           ];
           homebrew.casks = [
             # dev
