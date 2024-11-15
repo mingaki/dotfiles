@@ -54,8 +54,9 @@
           # Homebrew needs to be installed on its own!
           homebrew.enable = true;
           homebrew.brews = [
-            "php"
+            "j178/tap/leetgo"
             "mise"
+            "php"
           ];
           homebrew.casks = [
             # dev
