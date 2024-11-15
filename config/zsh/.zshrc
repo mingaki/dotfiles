@@ -61,6 +61,12 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 source <(fzf --zsh)
 
 # manage plugins by zim
+
+# prevent zsh-vi-mode from overriding fzf C-t key binding
+function zvm_after_init() {
+  zvm_bindkey viins "^R" fzf-history-widget
+}
+
 ZIM_CONFIG_FILE=~/.zimrc
 ZIM_HOME=~/.zim
 
