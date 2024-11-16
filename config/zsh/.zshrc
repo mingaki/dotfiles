@@ -67,6 +67,8 @@ function zvm_after_init() {
   zvm_bindkey viins "^R" fzf-history-widget
 }
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929ca6"
+
 ZIM_CONFIG_FILE=~/.zimrc
 ZIM_HOME=~/.zim
 

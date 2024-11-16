@@ -1,7 +1,4 @@
 zmodule jeffreytse/zsh-vi-mode
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929ca6"
 zmodule zsh-users/zsh-syntax-highlighting
-
 zmodule zsh-users/zsh-completions --fpath src
 zmodule zsh-users/zsh-autosuggestions
