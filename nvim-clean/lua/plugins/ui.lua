@@ -1,5 +1,64 @@
 return {
   {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+      },
+      sections = {
+        lualine_c = { { "filename", path = 3 } },
+      },
+    },
+  },
+  {
+    "Bekaboo/dropbar.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
+    opts = {
+      -- disable file path
+      bar = {
+        sources = function(buf, _)
+          local sources = require("dropbar.sources")
+          local utils = require("dropbar.utils")
+
+          local filename = {
+            get_symbols = function(buff, win, cursor)
+              local symbols = sources.path.get_symbols(buff, win, cursor)
+              return { symbols[#symbols] }
+            end,
+          }
+
+          if vim.bo[buf].ft == "markdown" then
+            return { filename, sources.markdown }
+          end
+          if vim.bo[buf].buftype == "terminal" then
+            return { filename, sources.terminal }
+          end
+          return { filename, utils.source.fallback({ sources.lsp, sources.treesitter }) }
+        end,
+      },
+    },
+    config = function(_, opts)
+      vim.api.nvim_set_hl(0, "WinBar", { link = "NavicText" })
+      require("dropbar").setup(opts)
+    end,
+    keys = {
+      {
+        "<leader>cp",
+        function()
+          require("dropbar.api").pick()
+        end,
+        desc = "Pick dropbar",
+      },
+    },
+  },
+  "nvim-tree/nvim-web-devicons",
+  {
     "echasnovski/mini.indentscope",
     event = { "BufReadPre", "BufNewFile" },
     opts = {

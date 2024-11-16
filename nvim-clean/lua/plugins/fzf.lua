@@ -1,6 +1,5 @@
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "echasnovski/mini.icons", opts = {} },
   opts = {
     winopts = { backdrop = 100 },
     files = { cwd_prompt = false },

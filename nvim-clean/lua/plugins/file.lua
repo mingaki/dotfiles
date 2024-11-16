@@ -9,7 +9,6 @@ return {
       show_hidden = true,
     },
     -- Optional dependencies
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
     lazy = false,
     keys = {
       {
