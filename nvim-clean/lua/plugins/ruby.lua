@@ -1,8 +1,8 @@
 return {
-  -- {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   opts = { ensure_installed = { "ruby" } },
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "ruby" } },
+  },
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -17,22 +17,28 @@ return {
     opts = {
       formatters_by_ft = {
         ruby = { "rubocop" },
+        eruby = { "erb_format" },
       },
     },
   },
-  opts = {
-    adapters = {
-      ["neotest-rspec"] = {
-        -- NOTE: By default neotest-rspec uses the system wide rspec gem instead of the one through bundler
-        -- rspec_cmd = function()
-        --   return vim.tbl_flatten({
-        --     "bundle",
-        --     "exec",
-        --     "rspec",
-        --   })
-        -- end,
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "olimorris/neotest-rspec",
+    },
+    opts = {
+      adapters = {
+        ["neotest-rspec"] = {
+          -- NOTE: By default neotest-rspec uses the system wide rspec gem instead of the one through bundler
+          -- rspec_cmd = function()
+          --   return vim.tbl_flatten({
+          --     "bundle",
+          --     "exec",
+          --     "rspec",
+          --   })
+          -- end,
+        },
       },
     },
   },
-  "olimorris/neotest-rspec",
 }
