@@ -6,9 +6,14 @@ return {
       options = {
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+        disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
       },
       sections = {
-        lualine_c = { { "filename", path = 3 } },
+        lualine_b = { "branch" },
+        lualine_c = {
+          "diagnostics",
+          { "filename", path = 3 },
+        },
       },
     },
   },
@@ -114,7 +119,7 @@ return {
         hide = {
           -- this is taken care of by lualine
           -- enabling this messes up the actual laststatus setting after loading a file
-          statusline = true,
+          statusline = false,
         },
         config = {
           header = vim.split(logo, "\n"),

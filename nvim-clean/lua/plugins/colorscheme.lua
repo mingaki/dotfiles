@@ -28,6 +28,7 @@ return {
         LspReferenceRead = { bg = "#e2e6d8" },
         LspReferenceWrite = { bg = "#e2e6d8" },
         LspReferenceText = { bg = "#e2e6d8" },
+        WarningMsg = { fg = "#d49e53" },
       },
     },
   },

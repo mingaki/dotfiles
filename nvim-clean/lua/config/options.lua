@@ -46,6 +46,7 @@ opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "glob
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 4 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.showmode = false
 opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = "yes"
 opt.smartcase = true -- Don't ignore case with capitals
