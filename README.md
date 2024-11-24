@@ -4,8 +4,9 @@
 
 ### Install Nix
 
+Use [nix-installer](https://github.com/DeterminateSystems/nix-installer) to
+install with flake feature enabled:
 
-Use [nix-installer](https://github.com/DeterminateSystems/nix-installer) to install with flake feature enabled:
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
   sh -s -- install
