@@ -93,6 +93,5 @@
     ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace.toml";
   };
 
-  programs.zsh.enable = true;
   programs.home-manager.enable = true;
 }
