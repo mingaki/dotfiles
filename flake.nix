@@ -72,6 +72,7 @@
             "google-drive"
             "iina"
             "spotify"
+            "cleanshot"
 
             # chat
             "slack"
