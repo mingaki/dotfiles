@@ -53,6 +53,10 @@
     pyright
     uv
 
+    # javascript
+    typescript-language-server
+    prettierd
+
     # nix
     nil
     nixfmt-rfc-style
