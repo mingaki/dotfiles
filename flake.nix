@@ -27,17 +27,15 @@
           environment.systemPackages = [
             pkgs.vim
           ];
-          services.nix-daemon.enable = true;
           nix.settings.experimental-features = "nix-command flakes";
           # programs.zsh.enable = true; # default shell on catalina
           nixpkgs.config = {
             allowUnfree = true;
           };
           nixpkgs.hostPlatform = "aarch64-darwin";
-          security.pam.enableSudoTouchIdAuth = true;
+          security.pam.services.sudo_local.touchIdAuth = true;
 
           users.users.claude.home = "/Users/claude";
-          nix.useDaemon = true;
 
           system.stateVersion = 5;
 
@@ -99,7 +97,6 @@
             "stats"
 
             # miscs
-            "monitorcontrol"
             "mos"
 
             # fonts and symbols

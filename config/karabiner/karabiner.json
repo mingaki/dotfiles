@@ -6,6 +6,21 @@
                 "parameters": { "basic.simultaneous_threshold_milliseconds": 80 },
                 "rules": [
                     {
+                        "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_control" }],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Post escape if esc is pressed alone, left_ctrl otherwise",
                         "manipulators": [
                             {

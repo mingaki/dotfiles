@@ -19,9 +19,6 @@ return {
   {
     -- Main LSP Configuration
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-    },
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
       servers = {
@@ -119,26 +116,14 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map(
-            "gd",
-            "<cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<cr>",
-            "[D]efinition"
-          )
+          map("gd", "<cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<cr>", "[D]efinition")
 
           -- Find references for the word under your cursor.
-          map(
-            "gr",
-            "<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<cr>",
-            "[R]eferences"
-          )
+          map("gr", "<cmd>FzfLua lsp_references jump1=true ignore_current_line=true<cr>", "[R]eferences")
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map(
-            "gI",
-            "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>",
-            "[I]mplementation"
-          )
+          map("gI", "<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>", "[I]mplementation")
 
           -- show diagnostics
           map("gl", vim.diagnostic.open_float, "Diagnostics")
@@ -146,11 +131,7 @@ return {
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map(
-            "gy",
-            "<cmd>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<cr>",
-            "T[y]pe Definition"
-          )
+          map("gy", "<cmd>FzfLua lsp_typedefs jump1=true ignore_current_line=true<cr>", "T[y]pe Definition")
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.

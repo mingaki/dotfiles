@@ -1,6 +1,34 @@
 return {
+  {
+    "saghen/blink.cmp",
+    dependencies = {
+      "Kaiser-Yang/blink-cmp-avante",
+      "rafamadriz/friendly-snippets",
+    },
+    version = "1.*",
+    opts = {
+      keymap = {
+        preset = "enter",
+        ["<C-d>"] = { "show", "show_documentation", "hide_documentation" },
+      },
+      sources = {
+        -- Add 'avante' to the list
+        default = { "avante", "lsp", "path", "snippets", "buffer" },
+        providers = {
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
+            opts = {
+              -- options for blink-cmp-avante
+            },
+          },
+        },
+      },
+    },
+  },
   { -- Autocompletion
     "hrsh7th/nvim-cmp",
+    enabled = false,
     event = "InsertEnter",
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source

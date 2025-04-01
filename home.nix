@@ -36,6 +36,9 @@
 
     # language specific
 
+    # cpp
+    cmake
+
     # rust
     cargo
 
@@ -77,7 +80,6 @@
     ".zprofile".source = ./config/zsh/.zprofile;
     ".zimrc".source = ./config/zsh/.zimrc;
     ".config/bat".source = ./config/bat;
-    ".config/karabiner".source = ./config/karabiner;
     ".config/kitty".source = ./config/kitty;
     ".config/lazygit/config.yml".source = ./config/lazygit/config.yml;
     ".config/skhd".source = ./config/skhd;
@@ -95,6 +97,7 @@
     # https://old.reddit.com/r/NixOS/comments/108fwwh/tradeoffs_of_using_home_manager_for_neovim_plugins/
     ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-clean";
     ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace.toml";
+    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/karabiner";
   };
 
   programs.home-manager.enable = true;

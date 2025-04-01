@@ -236,5 +236,31 @@ if.app-id = 'net.ankiweb.dtop'
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'com.apple.mail'
-run = 'move-node-to-workspace E' # mnemonics E - Email
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iBooksX'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id="com.mitchellh.ghostty"
+if.workspace = 'A'
+check-further-callbacks = true
+run= "layout floating"
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Picture in Picture'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = 'layout floating'
