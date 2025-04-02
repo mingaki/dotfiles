@@ -1,0 +1,9 @@
+theme = dawnfox
+selection-invert-fg-bg = true
+
+font-thicken = true
+
+keybind = global:ctrl+`=toggle_quick_terminal
+quick-terminal-autohide = false
+
+keybind =cmd+\=toggle_split_zoom

@@ -81,6 +81,7 @@
     ".zimrc".source = ./config/zsh/.zimrc;
     ".config/bat".source = ./config/bat;
     ".config/kitty".source = ./config/kitty;
+    ".config/ghostty".source = ./config/ghostty;
     ".config/lazygit/config.yml".source = ./config/lazygit/config.yml;
     ".config/skhd".source = ./config/skhd;
     ".config/starship.toml".source = ./config/starship.toml;
