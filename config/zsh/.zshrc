@@ -14,11 +14,6 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
-# avante
-function ai() {
-  export ANTHROPIC_API_KEY=$(op item get anthropic-api --format json --fields credential | jq -r .value)
-}
-
 # aliases
 alias ..="cd .."
 alias ll="ls -l"
@@ -41,14 +36,17 @@ alias h="tldr"
 alias top="btop"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 
-alias gh="op plugin run -- gh"
+if command -v op >/dev/null 2>&1; then
+  alias gh="op plugin run -- gh"
+fi
 
 alias proxyon='export http_proxy=127.0.0.1:7890;export https_proxy=$http_proxy'
 alias proxyoff='unset http_proxy;unset https_proxy'
 
-eval "$(mise activate zsh)"
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
+# Shell integrations with existence checks
+command -v mise >/dev/null 2>&1 && eval "$(mise activate zsh)"
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 
 # dawnfox fzf
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -58,7 +56,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
   --color=gutter:#faf4ed,border:#262626,label:#aeaeae,query:#618774
   --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="> "
   --marker="*" --pointer="◆" --separator="─" --scrollbar="│"'
-source <(fzf --zsh)
+command -v fzf >/dev/null 2>&1 && source <(fzf --zsh)
 
 # manage plugins by zim
 
@@ -73,6 +71,8 @@ ZIM_CONFIG_FILE=~/.zimrc
 ZIM_HOME=~/.zim
 
 # Download zimfw plugin manager if missing.
+# NOTE: This downloads from GitHub releases without verification
+# For enhanced security, consider manual verification of the script
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
       https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
