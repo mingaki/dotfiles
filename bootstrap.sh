@@ -72,7 +72,7 @@ fi
 # Install Nix with flakes enabled
 if ! command -v nix >/dev/null 2>&1; then
     print_status "Installing Nix with flakes support..."
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
     print_success "Nix installed with flakes enabled"
     
     # Source Nix for current session
