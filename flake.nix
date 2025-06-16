@@ -35,7 +35,7 @@
           nixpkgs.hostPlatform = "aarch64-darwin";
           security.pam.services.sudo_local.touchIdAuth = true;
 
-          users.users.claude.home = "/Users/claude";
+          users.users.${builtins.getEnv "USER"}.home = builtins.getEnv "HOME";
 
           system.stateVersion = 5;
 
@@ -118,7 +118,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.claude = import ./home.nix;
+            home-manager.users.${builtins.getEnv "USER"} = import ./home.nix;
           }
         ];
       };

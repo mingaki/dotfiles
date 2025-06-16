@@ -6,7 +6,7 @@ email = claude_g@outlook.com
 ui = true
 
 [core]
-	excludesfile = /Users/claude/.gitignore_global
+	excludesfile = ~/.gitignore_global
   pager = delta
 
 [interactive]
@@ -17,7 +17,7 @@ ui = true
 	light = true
   side-by-side = false
   line-numbers = true
-  syntax-theme = gruvbox-light
+  syntax-theme = dawnfox
   plus-style  = syntax "#d5f0d5"
 
 [merge]

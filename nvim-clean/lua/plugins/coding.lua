@@ -11,6 +11,9 @@ return {
         preset = "enter",
         ["<C-d>"] = { "show", "show_documentation", "hide_documentation" },
       },
+      completion = {
+        list = { selection = { preselect = false, auto_insert = true } },
+      },
       sources = {
         -- Add 'avante' to the list
         default = { "avante", "lsp", "path", "snippets", "buffer" },

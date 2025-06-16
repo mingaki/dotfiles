@@ -4,8 +4,8 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "claude";
-  home.homeDirectory = "/Users/claude";
+  home.username = builtins.getEnv "USER";
+  home.homeDirectory = builtins.getEnv "HOME";
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # Makes sense for user specific applications that shouldn't be available system-wide
@@ -81,7 +81,6 @@
     ".zimrc".source = ./config/zsh/.zimrc;
     ".config/bat".source = ./config/bat;
     ".config/kitty".source = ./config/kitty;
-    ".config/ghostty".source = ./config/ghostty;
     ".config/lazygit/config.yml".source = ./config/lazygit/config.yml;
     ".config/skhd".source = ./config/skhd;
     ".config/starship.toml".source = ./config/starship.toml;
@@ -96,9 +95,14 @@
 
     # for configs that change frequently, out-of-store-symlink avoids the need of rebuilding
     # https://old.reddit.com/r/NixOS/comments/108fwwh/tradeoffs_of_using_home_manager_for_neovim_plugins/
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-clean";
-    ".aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace.toml";
-    ".config/karabiner".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/karabiner";
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim-clean";
+    ".aerospace.toml".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/aerospace.toml";
+    ".config/karabiner".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/karabiner";
+    ".config/ghostty".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/ghostty";
   };
 
   programs.home-manager.enable = true;

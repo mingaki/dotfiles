@@ -7,7 +7,6 @@
                 "rules": [
                     {
                         "description": "Post escape if caps is pressed alone, left_ctrl otherwise",
-                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -22,6 +21,7 @@
                     },
                     {
                         "description": "Post escape if esc is pressed alone, left_ctrl otherwise",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
