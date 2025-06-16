@@ -14,6 +14,16 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+# avante
+function ai() {
+  if command -v op >/dev/null 2>&1; then
+    export ANTHROPIC_API_KEY=$(op item get anthropic-api --format json --fields credential | jq -r .value)
+  else
+    echo "1Password CLI not available. Please set ANTHROPIC_API_KEY manually or install 1Password CLI."
+    return 1
+  fi
+}
+
 # aliases
 alias ..="cd .."
 alias ll="ls -l"
@@ -34,7 +44,7 @@ alias v="nvim"
 alias nv="nvim"
 alias h="tldr"
 alias top="btop"
-alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias preview="fzf --preview 'bat --color \"always\" {}"
 
 if command -v op >/dev/null 2>&1; then
   alias gh="op plugin run -- gh"

@@ -1,0 +1,43 @@
+# chezmoi configuration with platform detection
+[data]
+  # OS detection (darwin, linux)
+  os = {{ .chezmoi.os | quote }}
+  
+  # Architecture detection (amd64, arm64)
+  arch = {{ .chezmoi.arch | quote }}
+  
+  # Platform combination for Nix
+  {{- if eq .chezmoi.os "darwin" }}
+    {{- if eq .chezmoi.arch "arm64" }}
+  nixPlatform = "aarch64-darwin"
+  homebrewPrefix = "/opt/homebrew"
+    {{- else }}
+  nixPlatform = "x86_64-darwin"
+  homebrewPrefix = "/usr/local"
+    {{- end }}
+  {{- else if eq .chezmoi.os "linux" }}
+    {{- if eq .chezmoi.arch "arm64" }}
+  nixPlatform = "aarch64-linux"
+    {{- else }}
+  nixPlatform = "x86_64-linux"
+    {{- end }}
+  {{- end }}
+  
+  # User information
+  username = {{ .chezmoi.username | quote }}
+  homeDir = {{ .chezmoi.homeDir | quote }}
+  
+  # Feature flags
+  isMacOS = {{ eq .chezmoi.os "darwin" }}
+  isLinux = {{ eq .chezmoi.os "linux" }}
+  isARM = {{ eq .chezmoi.arch "arm64" }}
+  
+[cd]
+  command = "zsh"
+
+[edit]
+  command = "nvim"
+
+[diff]
+  command = "nvim"
+  args = ["-d"]
