@@ -124,10 +124,26 @@ print_status "Initializing chezmoi with $REPO_URL (branch: $BRANCH)..."
 chezmoi init --apply "$REPO_URL" --branch "$BRANCH"
 
 print_success "🎉 Dotfiles setup complete!"
+
+# Transition from curl-chezmoi to Nix-chezmoi
+print_status "Transitioning to Nix-managed chezmoi..."
+if command -v nix >/dev/null 2>&1 && [[ -f "nix/flake.nix.tmpl" ]]; then
+    # Test if Nix flake works
+    cd ~ && nix develop ./nix --command chezmoi --version >/dev/null 2>&1
+    if [[ $? -eq 0 ]]; then
+        print_success "Nix-managed chezmoi is ready"
+        print_status "To use Nix-managed tools: nix develop ~/nix"
+    else
+        print_warning "Nix environment not ready, continuing with curl-installed chezmoi"
+    fi
+else
+    print_warning "Nix flake not found, continuing with curl-installed chezmoi"
+fi
+
 print_status "Next steps:"
-echo "  • Restart your shell or run: exec \$SHELL"
-echo "  • Enter Nix environment: nix develop"
-echo "  • chezmoi is now managed by Nix (check with: which chezmoi)"
+echo "  • Restart your shell or run: exec \$SHELL" 
+echo "  • Enter Nix environment: nix develop ~/nix"
+echo "  • Verify chezmoi source: nix develop ~/nix --command which chezmoi"
 echo "  • Update dotfiles anytime with: chezmoi update"
 
 if [[ "$OS" == "darwin" ]]; then
