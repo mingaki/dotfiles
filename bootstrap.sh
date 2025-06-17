@@ -106,14 +106,22 @@ fi
 # Get dotfiles repository URL
 REPO_URL=${1:-"https://github.com/mingaki/dotfiles.git"}
 
+# For testing migration branch
+if [[ "$REPO_URL" == "https://github.com/mingaki/dotfiles.git" ]]; then
+    REPO_URL="https://github.com/mingaki/dotfiles.git"
+    BRANCH="migration-chezmoi"
+else
+    BRANCH="main"
+fi
+
 if [[ "$REPO_URL" == "https://github.com/mingaki/dotfiles.git" ]]; then
     print_warning "Using default repository URL. You should set your own:"
     print_warning "  $0 https://github.com/yourusername/dotfiles.git"
 fi
 
 # Initialize chezmoi with the dotfiles repository
-print_status "Initializing chezmoi with $REPO_URL..."
-chezmoi init --apply "$REPO_URL"
+print_status "Initializing chezmoi with $REPO_URL (branch: $BRANCH)..."
+chezmoi init --apply "$REPO_URL" --branch "$BRANCH"
 
 print_success "🎉 Dotfiles setup complete!"
 print_status "Next steps:"
