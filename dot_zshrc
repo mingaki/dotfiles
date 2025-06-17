@@ -46,6 +46,12 @@ alias h="tldr"
 alias top="btop"
 alias preview="fzf --preview 'bat --color \"always\" {}"
 
+alias cz="chezmoi"
+alias czc="chezmoi cd"
+alias czs="chezmoi status"
+alias cza="chezmoi apply"
+alias czd="chezmoi diff"
+
 if command -v op >/dev/null 2>&1; then
   alias gh="op plugin run -- gh"
 fi
