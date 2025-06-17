@@ -73,7 +73,15 @@ fi
 if ! command -v nix >/dev/null 2>&1; then
     print_status "Installing Nix with flakes support..."
     export NIX_INSTALLER_NO_CONFIRM=true
-    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+    
+    # Check if systemd is available
+    if [[ "$OS" == "linux" ]] && ! systemctl --version >/dev/null 2>&1; then
+        # Linux without systemd (containers, some distros)
+        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux --init none
+    else
+        # macOS or Linux with systemd
+        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+    fi
     print_success "Nix installed with flakes enabled"
     
     # Source Nix for current session
