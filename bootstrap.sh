@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Simple bootstrap script for chezmoi dotfiles management
-# Usage: ./bootstrap.sh [REPO_URL] [DOTFILES_DIR]
+# Usage: ./bootstrap.sh [REPO_URL]
 #
 # REPO_URL: Git repository URL (default: https://github.com/mingaki/dotfiles.git)
-# DOTFILES_DIR: Local directory for dotfiles (default: ~/dotfiles)
 #
 # Run optional install scripts separately:
 #   ./scripts/install-nix.sh     # For CLI tools
@@ -32,36 +31,30 @@ else
     print_success "chezmoi already available"
 fi
 
-# Get repository URL, destination, and branch
+# Get repository URL and branch
 REPO_URL=${1:-"https://github.com/mingaki/dotfiles.git"}
-DOTFILES_DIR=${2:-"$HOME/dotfiles"}
 BRANCH="migration-chezmoi"
 
-# Clone repository to local directory
-print_status "Cloning dotfiles from $REPO_URL to $DOTFILES_DIR..."
-if [[ -d "$DOTFILES_DIR" ]]; then
-    print_status "Directory $DOTFILES_DIR exists, updating..."
-    cd "$DOTFILES_DIR" && git pull origin "$BRANCH"
-else
-    git clone "$REPO_URL" "$DOTFILES_DIR" --branch "$BRANCH"
-fi
-
-# Initialize chezmoi with local repository as source
-print_status "Initializing chezmoi with source: $DOTFILES_DIR"
-$CHEZMOI_CMD init --source "$DOTFILES_DIR"
-
-# Apply dotfiles
-print_status "Applying dotfiles..."
-$CHEZMOI_CMD apply
+# Initialize and apply dotfiles using standard chezmoi workflow
+print_status "Initializing chezmoi with $REPO_URL (branch: $BRANCH)..."
+$CHEZMOI_CMD init --apply "$REPO_URL" --branch "$BRANCH"
 
 print_success "🎉 Dotfiles applied successfully!"
 print_status "Your dotfiles are now managed by chezmoi:"
-echo "  • Source directory: $DOTFILES_DIR"
-echo "  • Edit configs in: $DOTFILES_DIR/dot_*"
+echo "  • Source directory: ~/.local/share/chezmoi"
+echo "  • Edit configs: chezmoi cd (opens source directory)"
 echo "  • Apply changes: chezmoi apply"
+echo "  • Check status: chezmoi status"
+echo ""
+print_status "Workflow example:"
+echo "  chezmoi cd          # Enter source directory" 
+echo "  vim dot_zshrc       # Edit config files"
+echo "  git add . && git commit -m 'update config'  # Git workflow"
+echo "  exit                # Return home"
+echo "  chezmoi apply       # Apply changes"
 echo ""
 print_status "Optional next steps:"
-echo "  • Install CLI tools: $DOTFILES_DIR/scripts/install-nix.sh"
-echo "  • Install macOS apps: $DOTFILES_DIR/scripts/install-homebrew.sh"
-echo "  • Update dotfiles: cd $DOTFILES_DIR && git pull && chezmoi apply"
+echo "  • Install CLI tools: chezmoi cd && ./scripts/install-nix.sh"
+echo "  • Install macOS apps: chezmoi cd && ./scripts/install-homebrew.sh" 
+echo "  • Update from remote: chezmoi update"
 echo "  • Restart shell: exec \$SHELL"
