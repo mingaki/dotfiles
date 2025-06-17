@@ -1,0 +1,14 @@
+# Universal shell environment setup
+export PATH="$HOME/.local/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
+export MY_BINS="$HOME/.local/scripts"
+export PATH="$MY_BINS:$PATH"
+
+# Homebrew path setup (macOS)
+if [[ $(uname -s) = "Darwin" ]]; then
+    if [[ $(uname -m) = "arm64" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+fi

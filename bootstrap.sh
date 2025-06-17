@@ -1,153 +1,44 @@
 #!/bin/bash
 
+# Simple bootstrap script for chezmoi dotfiles management
+# Run optional install scripts separately:
+#   ./scripts/install-nix.sh     # For CLI tools
+#   ./scripts/install-homebrew.sh # For macOS GUI apps
+
 set -e
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+print_status() { echo -e "\033[34m🔄 $1\033[0m"; }
+print_success() { echo -e "\033[32m✅ $1\033[0m"; }
+print_error() { echo -e "\033[31m❌ $1\033[0m"; }
 
-print_status() {
-    echo -e "${BLUE}🔄 $1${NC}"
-}
-
-print_success() {
-    echo -e "${GREEN}✅ $1${NC}"
-}
-
-print_warning() {
-    echo -e "${YELLOW}⚠️  $1${NC}"
-}
-
-print_error() {
-    echo -e "${RED}❌ $1${NC}"
-}
-
-# Detect and normalize platform
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-ARCH=$(uname -m)
-
-case $ARCH in
-    x86_64) ARCH="amd64" ;;
-    aarch64|arm64) ARCH="arm64" ;;
-    *) print_error "Unsupported architecture: $ARCH"; exit 1 ;;
-esac
-
-case $OS in
-    darwin|linux) ;; # Supported
-    *) print_error "Unsupported OS: $OS (only macOS and Linux supported)"; exit 1 ;;
-esac
-
-print_status "Detected platform: $OS/$ARCH"
-
-# Install Homebrew on macOS if not present
-if [[ "$OS" == "darwin" ]]; then
-    if ! command -v brew >/dev/null 2>&1; then
-        print_status "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        
-        # Add Homebrew to PATH for current session
-        if [[ "$ARCH" == "arm64" ]]; then
-            eval "$(/opt/homebrew/bin/brew shellenv)"
-        else
-            eval "$(/usr/local/bin/brew shellenv)"
-        fi
-        print_success "Homebrew installed"
-    else
-        print_success "Homebrew already installed"
-    fi
-fi
-
-# Install chezmoi if not present (temporary, will be managed by Nix after setup)
+# Install chezmoi if not present
 if ! command -v chezmoi >/dev/null 2>&1; then
-    print_status "Installing chezmoi (temporary bootstrap version)..."
-    sh -c "$(curl -fsLS get.chezmoi.io)"
-    print_success "chezmoi installed (will transition to Nix-managed version)"
-else
-    print_success "chezmoi already installed"
-fi
-
-# Install Nix with flakes enabled
-if ! command -v nix >/dev/null 2>&1; then
-    print_status "Installing Nix with flakes support..."
-    export NIX_INSTALLER_NO_CONFIRM=true
-    
-    # Check if systemd is available
-    if [[ "$OS" == "linux" ]] && ! systemctl --version >/dev/null 2>&1; then
-        # Linux without systemd (containers, some distros)
-        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux --init none
+    print_status "Installing chezmoi..."
+    if [[ -w /usr/local/bin ]]; then
+        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+        CHEZMOI_CMD="chezmoi"
     else
-        # macOS or Linux with systemd
-        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+        sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin"
+        CHEZMOI_CMD="$HOME/.local/bin/chezmoi"
     fi
-    print_success "Nix installed with flakes enabled"
-    
-    # Source Nix for current session
-    if [[ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]]; then
-        source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-    fi
+    print_success "chezmoi installed"
 else
-    print_success "Nix already installed"
-    
-    # Verify flakes are enabled
-    if ! nix --version | grep -q "flakes" 2>/dev/null; then
-        print_warning "Nix flakes may not be enabled. Checking configuration..."
-        if [[ ! -f "$HOME/.config/nix/nix.conf" ]] || ! grep -q "experimental-features.*flakes" "$HOME/.config/nix/nix.conf" 2>/dev/null; then
-            print_status "Enabling Nix flakes..."
-            mkdir -p "$HOME/.config/nix"
-            echo "experimental-features = nix-command flakes" >> "$HOME/.config/nix/nix.conf"
-            print_success "Nix flakes enabled"
-        fi
-    fi
+    CHEZMOI_CMD="chezmoi"
+    print_success "chezmoi already available"
 fi
 
-# Get dotfiles repository URL
+# Get repository URL and branch
 REPO_URL=${1:-"https://github.com/mingaki/dotfiles.git"}
+BRANCH="migration-chezmoi"
 
-# For testing migration branch
-if [[ "$REPO_URL" == "https://github.com/mingaki/dotfiles.git" ]]; then
-    REPO_URL="https://github.com/mingaki/dotfiles.git"
-    BRANCH="migration-chezmoi"
-else
-    BRANCH="main"
-fi
+# Initialize and apply dotfiles
+print_status "Applying dotfiles from $REPO_URL (branch: $BRANCH)..."
+$CHEZMOI_CMD init --apply "$REPO_URL" --branch "$BRANCH"
 
-if [[ "$REPO_URL" == "https://github.com/mingaki/dotfiles.git" ]]; then
-    print_warning "Using default repository URL. You should set your own:"
-    print_warning "  $0 https://github.com/yourusername/dotfiles.git"
-fi
+print_success "🎉 Dotfiles applied successfully!"
+print_status "Optional next steps:"
+echo "  • Install CLI tools: ./scripts/install-nix.sh"
+echo "  • Install macOS apps: ./scripts/install-homebrew.sh"
+echo "  • Update dotfiles: chezmoi update"
+echo "  • Restart shell: exec \$SHELL"
 
-# Initialize chezmoi with the dotfiles repository
-print_status "Initializing chezmoi with $REPO_URL (branch: $BRANCH)..."
-chezmoi init --apply "$REPO_URL" --branch "$BRANCH"
-
-print_success "🎉 Dotfiles setup complete!"
-
-# Transition from curl-chezmoi to Nix-chezmoi
-print_status "Transitioning to Nix-managed chezmoi..."
-if command -v nix >/dev/null 2>&1 && [[ -f "nix/flake.nix.tmpl" ]]; then
-    # Test if Nix flake works
-    cd ~ && nix develop ./nix --command chezmoi --version >/dev/null 2>&1
-    if [[ $? -eq 0 ]]; then
-        print_success "Nix-managed chezmoi is ready"
-        print_status "To use Nix-managed tools: nix develop ~/nix"
-    else
-        print_warning "Nix environment not ready, continuing with curl-installed chezmoi"
-    fi
-else
-    print_warning "Nix flake not found, continuing with curl-installed chezmoi"
-fi
-
-print_status "Next steps:"
-echo "  • Restart your shell or run: exec \$SHELL" 
-echo "  • Enter Nix environment: nix develop ~/nix"
-echo "  • Verify chezmoi source: nix develop ~/nix --command which chezmoi"
-echo "  • Update dotfiles anytime with: chezmoi update"
-
-if [[ "$OS" == "darwin" ]]; then
-    echo "  • Configure system preferences and restart services as needed"
-fi
-
-print_status "Note: chezmoi has transitioned from curl to Nix management"
