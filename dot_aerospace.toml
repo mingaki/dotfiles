@@ -252,6 +252,10 @@ if.app-id = 'com.openai.chat'
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id="com.mitchellh.ghostty"
 if.workspace = 'A'
 check-further-callbacks = true
