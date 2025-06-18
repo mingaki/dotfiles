@@ -1,6 +1,8 @@
-# Platform-specific ignores
-# Ignore macOS-only configs on non-macOS systems
+# universal
+init-brew.sh
+init-toolchain.sh
 
+# macos only
 {{- if ne .chezmoi.os "darwin" }}
 .aerospace.toml
 .config/karabiner/
