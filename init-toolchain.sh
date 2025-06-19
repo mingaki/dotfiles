@@ -29,11 +29,11 @@ fi
 
 print_success "mise and uv are available"
 
-# Install Python tools via uvx
-print_status "Installing Python development tools via uvx..."
-uvx install ruff
-uvx install pyright
-print_success "Python tools installed via uvx"
+# Install Python tools via uv
+print_status "Installing Python development tools via uv..."
+uv tool install ruff
+uv tool install pyright
+print_success "Python tools installed via uv"
 
 # Install other language runtimes via mise
 print_status "Installing other language runtimes..."
@@ -58,6 +58,9 @@ fi
 
 print_success "Language runtimes installed!"
 
+# Refresh environment to make cargo available
+eval "$(mise activate bash)"
+
 # Install language-specific tools
 print_status "Installing language-specific tools and LSPs..."
 
@@ -74,17 +77,8 @@ if ! mise list lua-language-server | grep -q "lua-language-server"; then
 fi
 
 # bash
-print_status "Installing Lua tools..."
-if ! mise list bash-language-server | grep -q "bash-language-server"; then
-    mise install bash-language-server@latest
-    mise use --global bash-language-server@latest
-fi
-
-# Nix LSP (nil)
-if ! mise list nil | grep -q "nil"; then
-    mise install nil@latest
-    mise use --global nil@latest
-fi
+print_status "Installing Bash tools..."
+npm install -g bash-language-server
 
 # Markdown LSP
 if ! mise list marksman | grep -q "marksman"; then
