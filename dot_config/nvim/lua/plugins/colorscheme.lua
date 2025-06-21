@@ -1,9 +1,11 @@
 return {
   "EdenEast/nightfox.nvim",
-  version = "*",
-  lazy = true,
+  -- version = "*",
+  lazy = false,
+  priority = 1000,
   opts = {
     options = {
+      transparent = true,
       styles = {
         keywords = "italic,bold",
       },
@@ -32,4 +34,18 @@ return {
       },
     },
   },
+  config = function(opts, _)
+    -- somehow setting this in opts.group doesn't work..
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+      pattern = { "help" },
+      callback = function()
+        vim.api.nvim_set_hl(0, "@markup.raw.block", { fg = "#8f7367" })
+        vim.api.nvim_set_hl(0, "@markup.raw.block.markdown", { fg = "#8f7367" })
+        vim.api.nvim_set_hl(0, "@markup.raw.block.vimdoc", { fg = "#8f7367" })
+      end,
+    })
+
+    require("nightfox").setup(opts)
+    vim.cmd([[colorscheme dawnfox]])
+  end,
 }
