@@ -4,7 +4,7 @@ selection-invert-fg-bg = true
 font-thicken = true
 font-size = 15
 
-keybind = global:ctrl+`=toggle_quick_terminal
+keybind = global:option+`=toggle_quick_terminal
 quick-terminal-autohide = false
 
 keybind =cmd+\=toggle_split_zoom
