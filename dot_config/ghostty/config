@@ -1,5 +1,7 @@
 theme = dawnfox
 selection-invert-fg-bg = true
+background-opacity = 1
+background-blur = 20
 
 font-thicken = true
 font-size = 15
